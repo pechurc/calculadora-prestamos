@@ -11,8 +11,10 @@ import javax.persistence.ManyToOne;
 public class PersonaPk implements Serializable {
 
     private static final long serialVersionUID = -3642663003863251905L;
+    
     @Column(name = "numero_documento", nullable = false)
     private Long numeroDocumento;
+    
     @ManyToOne
     @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento")
     private TipoDocumentoEntity tipoDocumento;
