@@ -11,7 +11,7 @@ public class TipoDocumentoEntity {
 
     @Id
     @Column(name = "id_tipodocumento", nullable = false)
-    private Long id;
+    private Integer id;
     
     @Column(name = "nombre", nullable = false, unique = true)
     private String nombre;
@@ -22,11 +22,11 @@ public class TipoDocumentoEntity {
     @Column(name = "validar_como_cuit", nullable = false)
     private Boolean validarComoCuit;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

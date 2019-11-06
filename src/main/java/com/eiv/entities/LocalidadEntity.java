@@ -14,7 +14,7 @@ public class LocalidadEntity {
     
     @Id
     @Column(name = "id_localidad")
-    private Long id;
+    private Integer id;
     
     @Column(name = "nombre", length = 300, nullable = false)
     private String nombre;
@@ -26,11 +26,11 @@ public class LocalidadEntity {
     @JoinColumn(name = "id_provincia", referencedColumnName = "id_provincia")
     private ProvinciaEntity provincia;
     
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
