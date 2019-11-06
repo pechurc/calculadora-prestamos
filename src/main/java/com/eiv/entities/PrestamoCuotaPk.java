@@ -13,10 +13,10 @@ public class PrestamoCuotaPk implements Serializable {
     private static final long serialVersionUID = 8878257701407645703L;
     
     @ManyToOne
-    @JoinColumn(name = "prestamo_id", referencedColumnName = "prestamo_id")
+    @JoinColumn(name = "prestamo_id", referencedColumnName = "prestamo_id", nullable = false)
     private PrestamoEntity prestamo;
     
-    @Column(name = "nro_cuota")
+    @Column(name = "nro_cuota", nullable = false)
     private Integer nroCuota;
     
     public PrestamoCuotaPk() { }

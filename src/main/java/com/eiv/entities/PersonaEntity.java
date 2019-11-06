@@ -19,7 +19,7 @@ public class PersonaEntity {
     @EmbeddedId
     private PersonaPk id;
     
-    @Column(name = "nombre_apellido", length = 400, nullable = false)
+    @Column(name = "nombre_apellido", length = 400, nullable = false, unique = true)
     private String nombreApellido;
     
     @Column(name = "fecha_nacimiento", nullable = false)

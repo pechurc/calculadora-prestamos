@@ -14,13 +14,13 @@ public class PrestamoCuotaEntity {
     @EmbeddedId
     private PrestamoCuotaPk id;
     
-    @Column(name = "importe_capital")
+    @Column(name = "importe_capital", nullable = false)
     private BigDecimal importeCapital;
 
-    @Column(name = "importe_intereses")
+    @Column(name = "importe_intereses", nullable = false)
     private BigDecimal importeIntereses;
 
-    @Column(name = "importe_total")
+    @Column(name = "importe_total", nullable = false)
     private BigDecimal importeTotal;
 
     public PrestamoCuotaEntity() { }

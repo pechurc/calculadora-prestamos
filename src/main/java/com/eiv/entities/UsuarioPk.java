@@ -14,8 +14,10 @@ public class UsuarioPk implements Serializable {
     
     @Column(name = "numero_documento", nullable = false)
     private Long numeroDocumento;
+    
     @ManyToOne
-    @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento")
+    @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento"
+        , nullable = false)
     private TipoDocumentoEntity tipoDocumento;
 
     public UsuarioPk() { }

@@ -1,5 +1,6 @@
 package com.eiv.entities;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,15 +12,18 @@ public class UsuarioEntity {
     @EmbeddedId
     private UsuarioPk id;
     
+    @Column(name = "nombre_usuario", length = 50, nullable = false)
     private String nombreUsuario;
-    private String hashed_pwd;
+    
+    @Column(name = "hashed_pwd", length = 200, nullable = false)
+    private String hashedPwd;
     
     public UsuarioEntity() { }
     
     public UsuarioEntity(UsuarioPk id, String nombreUsuario, String hashed_pwd) {
         this.id = id;
         this.nombreUsuario = nombreUsuario;
-        this.hashed_pwd = hashed_pwd;
+        this.hashedPwd = hashed_pwd;
     }
 
     public UsuarioPk getId() {
@@ -39,18 +43,18 @@ public class UsuarioEntity {
     }
     
     public String getHashed_pwd() {
-        return hashed_pwd;
+        return hashedPwd;
     }
     
     public void setHashed_pwd(String hashed_pwd) {
-        this.hashed_pwd = hashed_pwd;
+        this.hashedPwd = hashed_pwd;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((hashed_pwd == null) ? 0 : hashed_pwd.hashCode());
+        result = prime * result + ((hashedPwd == null) ? 0 : hashedPwd.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nombreUsuario == null) ? 0 : nombreUsuario.hashCode());
         return result;
@@ -68,11 +72,11 @@ public class UsuarioEntity {
             return false;
         }
         UsuarioEntity other = (UsuarioEntity) obj;
-        if (hashed_pwd == null) {
-            if (other.hashed_pwd != null) {
+        if (hashedPwd == null) {
+            if (other.hashedPwd != null) {
                 return false;
             }
-        } else if (!hashed_pwd.equals(other.hashed_pwd)) {
+        } else if (!hashedPwd.equals(other.hashedPwd)) {
             return false;
         }
         if (id == null) {
