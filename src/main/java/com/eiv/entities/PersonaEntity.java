@@ -21,10 +21,6 @@ public class PersonaEntity {
     @EmbeddedId
     private PersonaPk id;
     
-    @ManyToOne
-    @JoinColumn(name = "id_tipodocumento",insertable = false, updatable = false)
-    private TipoDocumentoEntity tipoDocumento;
-    
     @Column(name = "nombre_apellido", length = 400, nullable = false, unique = true)
     private String nombreApellido;
     
