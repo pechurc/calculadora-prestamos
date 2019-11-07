@@ -1,6 +1,6 @@
 package com.eiv.enums;
 
-public enum RegionEnum {
+public enum RegionEnum implements GenericEnum<RegionEnum, String> {
     NOROESTE("NOA"),
     NORDESTE("NOE"),
     PAMPEANA("PAM"),
@@ -35,5 +35,10 @@ public enum RegionEnum {
             throw new IllegalArgumentException(
                     String.format("No se reconoce %s como una region", region));
         }
+    }
+
+    @Override
+    public String getId() {
+        return this.region;
     }
 }

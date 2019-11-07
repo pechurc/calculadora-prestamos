@@ -1,6 +1,6 @@
 package com.eiv.enums;
 
-public enum GeneroEnum {
+public enum GeneroEnum implements GenericEnum<GeneroEnum, Character> {
     
     MASCULINO('M'),
     FEMENINO('F');
@@ -26,5 +26,10 @@ public enum GeneroEnum {
                 throw new IllegalArgumentException(
                         String.format("No se reconoce %s como un genero", c));
         }
+    }
+
+    @Override
+    public Character getId() {
+        return genero;
     }
 }

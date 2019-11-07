@@ -1,21 +1,16 @@
 package com.eiv.converters;
 
-import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 import com.eiv.enums.GeneroEnum;
 
 @Converter(autoApply = true)
-public class GeneroConverter implements AttributeConverter<GeneroEnum, Character> {
+public class GeneroConverter extends GenericConverter<GeneroEnum, Character> {
 
-    @Override
-    public Character convertToDatabaseColumn(GeneroEnum attribute) {
-        return attribute.getGenero();
+    public static GeneroConverter instance = new GeneroConverter();
+    
+    public GeneroConverter() {
+        super(GeneroEnum.class);
     }
-
-    @Override
-    public GeneroEnum convertToEntityAttribute(Character dbData) {
-        return GeneroEnum.of(dbData);
-    }
-
+    
 }
