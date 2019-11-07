@@ -1,6 +1,6 @@
 package com.eiv.enums;
 
-public enum GeneroEnum implements GenericEnum<GeneroEnum, Character> {
+public enum GeneroEnum implements GenericEnum<Character> {
     
     MASCULINO('M'),
     FEMENINO('F');

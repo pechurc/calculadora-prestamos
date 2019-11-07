@@ -1,6 +1,6 @@
 package com.eiv.enums;
 
-public enum SistemaAmortizacionEnum implements GenericEnum<SistemaAmortizacionEnum, Character>{
+public enum SistemaAmortizacionEnum implements GenericEnum<Character>{
     ALEMAN('G'),
     FRANCES('F'),
     AMERICANO('A');

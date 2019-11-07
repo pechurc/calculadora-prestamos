@@ -7,7 +7,7 @@ import javax.persistence.AttributeConverter;
 
 import com.eiv.enums.GenericEnum;
 
-public abstract class GenericConverter<X extends Enum<X> & GenericEnum<X, Id>, Id> 
+public abstract class GenericConverter<X extends Enum<X> & GenericEnum<Id>, Id> 
     implements AttributeConverter<X, Id> {
 
     private Map<Id, X> map;

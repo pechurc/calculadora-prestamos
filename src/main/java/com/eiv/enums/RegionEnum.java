@@ -1,6 +1,6 @@
 package com.eiv.enums;
 
-public enum RegionEnum implements GenericEnum<RegionEnum, String> {
+public enum RegionEnum implements GenericEnum<String> {
     NOROESTE("NOA"),
     NORDESTE("NOE"),
     PAMPEANA("PAM"),
