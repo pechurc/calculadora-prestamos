@@ -13,7 +13,7 @@ public class PersonaPkEntity implements Serializable {
     private static final long serialVersionUID = -3642663003863251905L;
     
     @Column(name = "numero_documento", nullable = false)
-    private Integer numeroDocumento;
+    private Long numeroDocumento;
     
     @ManyToOne
     @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento"
@@ -22,15 +22,15 @@ public class PersonaPkEntity implements Serializable {
 
     public PersonaPkEntity() { }
     
-    public PersonaPkEntity(Integer numeroDocumento, TipoDocumentoEntity tipoDocumento) {
+    public PersonaPkEntity(Long numeroDocumento, TipoDocumentoEntity tipoDocumento) {
         this.numeroDocumento = numeroDocumento;
         this.tipoDocumento = tipoDocumento;
     }
 
-    public Integer getNumeroDocumento() {
+    public Long getNumeroDocumento() {
         return numeroDocumento;
     }
-    public void setNumeroDocumento(Integer numeroDocumento) {
+    public void setNumeroDocumento(Long numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
     public TipoDocumentoEntity getTipoDocumento() {

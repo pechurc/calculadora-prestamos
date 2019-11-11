@@ -126,7 +126,6 @@ public class PersonaEntity {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((nombreApellido == null) ? 0 : nombreApellido.hashCode());
         return result;
     }
 

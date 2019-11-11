@@ -11,22 +11,22 @@ public class UsuarioPkEntity implements Serializable {
     private static final long serialVersionUID = -7380538156246465628L;
     
     @Column(name = "numero_documento", nullable = false)
-    private Integer numeroDocumento;
+    private Long numeroDocumento;
     
     @Column(name = "id_tipodocumento", nullable = false)
     private Integer tipoDocumento;
 
     public UsuarioPkEntity() { }
     
-    public UsuarioPkEntity(Integer numeroDocumento, TipoDocumentoEntity tipoDocumento) {
+    public UsuarioPkEntity(Long numeroDocumento, TipoDocumentoEntity tipoDocumento) {
         this.numeroDocumento = numeroDocumento;
         this.tipoDocumento = tipoDocumento.getId();
     }
 
-    public Integer getNumeroDocumento() {
+    public Long getNumeroDocumento() {
         return numeroDocumento;
     }
-    public void setNumeroDocumento(Integer numeroDocumento) {
+    public void setNumeroDocumento(Long numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
     public Integer getTipoDocumento() {
