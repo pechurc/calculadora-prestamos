@@ -3,6 +3,10 @@ package com.eiv.entities;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,7 +14,14 @@ import javax.persistence.Table;
 public class UsuarioEntity {
     
     @EmbeddedId
-    private UsuarioPk id;
+    private UsuarioPkEntity pk;
+    
+    @OneToOne
+    @MapsId("personaPkEntity")
+    @JoinColumns({ 
+            @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento"),
+            @JoinColumn(name = "numero_documento", referencedColumnName = "numero_documento") })
+    private PersonaEntity persona;
     
     @Column(name = "nombre_usuario", length = 50, nullable = false)
     private String nombreUsuario;
@@ -20,18 +31,18 @@ public class UsuarioEntity {
     
     public UsuarioEntity() { }
     
-    public UsuarioEntity(UsuarioPk id, String nombreUsuario, String hashed_pwd) {
-        this.id = id;
+    public UsuarioEntity(UsuarioPkEntity pk, String nombreUsuario, String hashed_pwd) {
+        this.pk = pk;
         this.nombreUsuario = nombreUsuario;
         this.hashedPwd = hashed_pwd;
     }
 
-    public UsuarioPk getId() {
-        return id;
+    public UsuarioPkEntity getId() {
+        return pk;
     }
     
-    public void setId(UsuarioPk id) {
-        this.id = id;
+    public void setId(UsuarioPkEntity id) {
+        this.pk = id;
     }
     
     public String getNombreUsuario() {
@@ -50,12 +61,28 @@ public class UsuarioEntity {
         this.hashedPwd = hashed_pwd;
     }
 
+    public String getHashedPwd() {
+        return hashedPwd;
+    }
+
+    public void setHashedPwd(String hashedPwd) {
+        this.hashedPwd = hashedPwd;
+    }
+
+    public PersonaEntity getPersona() {
+        return persona;
+    }
+
+    public void setPersona(PersonaEntity persona) {
+        this.persona = persona;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((hashedPwd == null) ? 0 : hashedPwd.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((pk == null) ? 0 : pk.hashCode());
         result = prime * result + ((nombreUsuario == null) ? 0 : nombreUsuario.hashCode());
         return result;
     }
@@ -79,11 +106,11 @@ public class UsuarioEntity {
         } else if (!hashedPwd.equals(other.hashedPwd)) {
             return false;
         }
-        if (id == null) {
-            if (other.id != null) {
+        if (pk == null) {
+            if (other.pk != null) {
                 return false;
             }
-        } else if (!id.equals(other.id)) {
+        } else if (!pk.equals(other.pk)) {
             return false;
         }
         if (nombreUsuario == null) {
@@ -98,6 +125,6 @@ public class UsuarioEntity {
 
     @Override
     public String toString() {
-        return "UsuarioEntity [id=" + id + ", nombreUsuario=" + nombreUsuario + "]";
+        return "UsuarioEntity [pk=" + pk + ", nombreUsuario=" + nombreUsuario + "]";
     }    
 }

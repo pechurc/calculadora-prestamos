@@ -19,7 +19,7 @@ import com.eiv.enums.GeneroEnum;
 public class PersonaEntity {
 
     @EmbeddedId
-    private PersonaPk id;
+    private PersonaPkEntity id;
     
     @Column(name = "nombre_apellido", length = 400, nullable = false, unique = true)
     private String nombreApellido;
@@ -49,11 +49,11 @@ public class PersonaEntity {
     
     public PersonaEntity() { }
 
-    public PersonaPk getId() {
+    public PersonaPkEntity getId() {
         return id;
     }
 
-    public void setId(PersonaPk id) {
+    public void setId(PersonaPkEntity id) {
         this.id = id;
     }
 

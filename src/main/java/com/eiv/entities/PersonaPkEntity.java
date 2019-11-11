@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class PersonaPk implements Serializable {
+public class PersonaPkEntity implements Serializable {
 
     private static final long serialVersionUID = -3642663003863251905L;
     
@@ -20,9 +20,9 @@ public class PersonaPk implements Serializable {
         , nullable = false)
     private TipoDocumentoEntity tipoDocumento;
 
-    public PersonaPk() { }
+    public PersonaPkEntity() { }
     
-    public PersonaPk(Integer numeroDocumento, TipoDocumentoEntity tipoDocumento) {
+    public PersonaPkEntity(Integer numeroDocumento, TipoDocumentoEntity tipoDocumento) {
         this.numeroDocumento = numeroDocumento;
         this.tipoDocumento = tipoDocumento;
     }
@@ -60,7 +60,7 @@ public class PersonaPk implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        PersonaPk other = (PersonaPk) obj;
+        PersonaPkEntity other = (PersonaPkEntity) obj;
         if (numeroDocumento == null) {
             if (other.numeroDocumento != null) {
                 return false;

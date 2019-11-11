@@ -4,27 +4,23 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Embeddable
-public class UsuarioPk implements Serializable {
+public class UsuarioPkEntity implements Serializable {
 
     private static final long serialVersionUID = -7380538156246465628L;
     
     @Column(name = "numero_documento", nullable = false)
     private Integer numeroDocumento;
     
-    @ManyToOne
-    @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento"
-        , nullable = false)
-    private TipoDocumentoEntity tipoDocumento;
+    @Column(name = "id_tipodocumento", nullable = false)
+    private Integer tipoDocumento;
 
-    public UsuarioPk() { }
+    public UsuarioPkEntity() { }
     
-    public UsuarioPk(Integer numeroDocumento, TipoDocumentoEntity tipoDocumento) {
+    public UsuarioPkEntity(Integer numeroDocumento, TipoDocumentoEntity tipoDocumento) {
         this.numeroDocumento = numeroDocumento;
-        this.tipoDocumento = tipoDocumento;
+        this.tipoDocumento = tipoDocumento.getId();
     }
 
     public Integer getNumeroDocumento() {
@@ -33,10 +29,10 @@ public class UsuarioPk implements Serializable {
     public void setNumeroDocumento(Integer numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
-    public TipoDocumentoEntity getTipoDocumento() {
+    public Integer getTipoDocumento() {
         return tipoDocumento;
     }
-    public void setTipoDocumento(TipoDocumentoEntity tipoDocumento) {
+    public void setTipoDocumento(Integer tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
     
@@ -60,7 +56,7 @@ public class UsuarioPk implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        UsuarioPk other = (UsuarioPk) obj;
+        UsuarioPkEntity other = (UsuarioPkEntity) obj;
         if (numeroDocumento == null) {
             if (other.numeroDocumento != null) {
                 return false;
