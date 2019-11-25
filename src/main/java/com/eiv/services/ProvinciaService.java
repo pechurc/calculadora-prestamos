@@ -23,6 +23,12 @@ public class ProvinciaService {
         return provinciaRepository.findById(id);
     }
     
+    @Transactional(readOnly = true)
+    public ProvinciaEntity getById(Integer id) {
+        return provinciaRepository.findById(id)
+                .orElseThrow(exceptionSupplier(id));
+    }
+    
     @Transactional
     public ProvinciaEntity nueva(IProvincia provincia) {
         
@@ -63,6 +69,6 @@ public class ProvinciaService {
     
     private Supplier<? extends RuntimeException> exceptionSupplier(Integer id) {
         
-        return ExceptionUtils.notFoundExceptionSupplier("Provincia con ID=%s no existe", id);
+        return ExceptionUtils.notFoundExceptionSupplier("Provincia con ID=%s no encontrada", id);
     }
 }
