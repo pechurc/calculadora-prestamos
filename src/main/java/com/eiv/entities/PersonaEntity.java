@@ -21,6 +21,14 @@ public class PersonaEntity {
     @EmbeddedId
     private PersonaPkEntity id;
     
+    @Column(name = "numero_documento", nullable = false, insertable = false, updatable = false)
+    private Long numeroDocumento;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento", 
+    insertable = false, updatable = false)
+    private TipoDocumentoEntity tipoDocumento;
+    
     @Column(name = "nombre_apellido", length = 400, nullable = false, unique = true)
     private String nombreApellido;
     
@@ -119,6 +127,22 @@ public class PersonaEntity {
 
     public void setFoto_cara(Byte[] foto_cara) {
         this.foto_cara = foto_cara;
+    }
+    
+    public Long getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(Long numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public TipoDocumentoEntity getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumentoEntity tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
     @Override

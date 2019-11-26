@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +15,14 @@ public class PrestamoCuotaEntity {
 
     @EmbeddedId
     private PrestamoCuotaPk id;
+    
+    @ManyToOne
+    @JoinColumn(name = "prestamo_id", referencedColumnName = "prestamo_id", nullable = false,
+    insertable = false, updatable = false)
+    private PrestamoEntity prestamo;
+    
+    @Column(name = "nro_cuota", nullable = false, insertable = false, updatable = false)
+    private Integer nroCuota;
     
     @Column(name = "importe_capital", nullable = false)
     private BigDecimal importeCapital;
@@ -55,6 +65,22 @@ public class PrestamoCuotaEntity {
 
     public void setImporteTotal(BigDecimal importeTotal) {
         this.importeTotal = importeTotal;
+    }
+    
+    public PrestamoEntity getPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(PrestamoEntity prestamo) {
+        this.prestamo = prestamo;
+    }
+
+    public Integer getNroCuota() {
+        return nroCuota;
+    }
+
+    public void setNroCuota(Integer nroCuota) {
+        this.nroCuota = nroCuota;
     }
 
     @Override

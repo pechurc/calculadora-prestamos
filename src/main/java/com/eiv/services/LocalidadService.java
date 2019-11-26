@@ -21,6 +21,14 @@ public class LocalidadService {
      @Autowired
      private ProvinciaService provinciaService;
 
+     @Transactional(readOnly = true)
+     public LocalidadEntity getById(Integer id) {
+         
+         return localidadRepository
+                 .findById(id)
+                 .orElseThrow(exceptionSupplier(id));
+     }
+     
      @Transactional
      public LocalidadEntity nueva(ILocalidad localidad) {
          
@@ -40,10 +48,11 @@ public class LocalidadService {
      }
      
      @Transactional
-     public LocalidadEntity modificar(Integer id, ILocalidad localidad) {
+     public LocalidadEntity actualizar(Integer id, ILocalidad localidad) {
          
          ProvinciaEntity provinciaEntity = provinciaService.getById(localidad.getProvinciaId());
-         LocalidadEntity localidadEntity = localidadRepository.findById(id)
+         LocalidadEntity localidadEntity = localidadRepository
+                 .findById(id)
                  .orElseThrow(exceptionSupplier(id));
          
          localidadEntity.setNombre(localidad.getNombre());
@@ -58,7 +67,8 @@ public class LocalidadService {
      @Transactional
      public void borrar(Integer id) {
          
-         LocalidadEntity localidadEntity = localidadRepository.findById(id)
+         LocalidadEntity localidadEntity = localidadRepository
+                 .findById(id)
                  .orElseThrow(exceptionSupplier(id));
          
          localidadRepository.delete(localidadEntity);

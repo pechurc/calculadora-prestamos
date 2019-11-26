@@ -47,7 +47,8 @@ public class ProvinciaService {
     @Transactional
     public ProvinciaEntity actualizar(Integer id, IProvincia provincia) {
         
-        ProvinciaEntity provinciaEntity = provinciaRepository.findById(id)
+        ProvinciaEntity provinciaEntity = provinciaRepository
+                .findById(id)
                 .orElseThrow(exceptionSupplier(id));
         
         provinciaEntity.setNombre(provincia.getNombre());
@@ -61,7 +62,8 @@ public class ProvinciaService {
     @Transactional
     public void borrar(Integer id) {
         
-        ProvinciaEntity provinciaEntity = provinciaRepository.findById(id)
+        ProvinciaEntity provinciaEntity = provinciaRepository
+                .findById(id)
                 .orElseThrow(exceptionSupplier(id));
         
         provinciaRepository.delete(provinciaEntity);

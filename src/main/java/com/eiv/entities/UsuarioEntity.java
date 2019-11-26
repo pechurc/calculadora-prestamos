@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class UsuarioEntity {
     
     @EmbeddedId
-    private UsuarioPkEntity pk;
+    private PersonaPkEntity pk;
     
     @OneToOne
     @MapsId("personaPkEntity")
@@ -31,17 +31,17 @@ public class UsuarioEntity {
     
     public UsuarioEntity() { }
     
-    public UsuarioEntity(UsuarioPkEntity pk, String nombreUsuario, String hashed_pwd) {
+    public UsuarioEntity(PersonaPkEntity pk, String nombreUsuario, String hashed_pwd) {
         this.pk = pk;
         this.nombreUsuario = nombreUsuario;
         this.hashedPwd = hashed_pwd;
     }
 
-    public UsuarioPkEntity getId() {
+    public PersonaPkEntity getId() {
         return pk;
     }
     
-    public void setId(UsuarioPkEntity id) {
+    public void setId(PersonaPkEntity id) {
         this.pk = id;
     }
     

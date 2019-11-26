@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Embeddable
 public class PersonaPkEntity implements Serializable {
@@ -15,16 +13,14 @@ public class PersonaPkEntity implements Serializable {
     @Column(name = "numero_documento", nullable = false)
     private Long numeroDocumento;
     
-    @ManyToOne
-    @JoinColumn(name = "id_tipodocumento", referencedColumnName = "id_tipodocumento"
-        , nullable = false)
-    private TipoDocumentoEntity tipoDocumento;
+    @Column(name = "id_tipodocumento", nullable = false)
+    private Integer tipoDocumentoId;
 
     public PersonaPkEntity() { }
     
-    public PersonaPkEntity(Long numeroDocumento, TipoDocumentoEntity tipoDocumento) {
+    public PersonaPkEntity(Long numeroDocumento, Integer tipoDocumentoId) {
         this.numeroDocumento = numeroDocumento;
-        this.tipoDocumento = tipoDocumento;
+        this.tipoDocumentoId = tipoDocumentoId;
     }
 
     public Long getNumeroDocumento() {
@@ -33,11 +29,11 @@ public class PersonaPkEntity implements Serializable {
     public void setNumeroDocumento(Long numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
-    public TipoDocumentoEntity getTipoDocumento() {
-        return tipoDocumento;
+    public Integer getTipoDocumentoId() {
+        return tipoDocumentoId;
     }
-    public void setTipoDocumento(TipoDocumentoEntity tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
+    public void setTipoDocumentoId(Integer tipoDocumentoId) {
+        this.tipoDocumentoId = tipoDocumentoId;
     }
     
     @Override
@@ -45,7 +41,7 @@ public class PersonaPkEntity implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
-        result = prime * result + ((tipoDocumento == null) ? 0 : tipoDocumento.hashCode());
+        result = prime * result + ((tipoDocumentoId == null) ? 0 : tipoDocumentoId.hashCode());
         return result;
     }
     
@@ -68,11 +64,11 @@ public class PersonaPkEntity implements Serializable {
         } else if (!numeroDocumento.equals(other.numeroDocumento)) {
             return false;
         }
-        if (tipoDocumento == null) {
-            if (other.tipoDocumento != null) {
+        if (tipoDocumentoId == null) {
+            if (other.tipoDocumentoId != null) {
                 return false;
             }
-        } else if (!tipoDocumento.equals(other.tipoDocumento)) {
+        } else if (!tipoDocumentoId.equals(other.tipoDocumentoId)) {
             return false;
         }
         return true;
@@ -81,7 +77,7 @@ public class PersonaPkEntity implements Serializable {
     @Override
     public String toString() {
         return "PersonaPk [numeroDocumento=" + numeroDocumento + ", tipoDocumento=" 
-                + tipoDocumento + "]";
+                + tipoDocumentoId + "]";
     } 
     
 }
