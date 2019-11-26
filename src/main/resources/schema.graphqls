@@ -1,0 +1,22 @@
+schema{
+ query:Query
+}
+
+type Query {
+	provincias: [Provincia]
+  	provincia(id: ID): Provincia
+}
+
+type Provincia {
+  	id: ID
+  	nombre: String
+  	region: Region
+}
+
+enum Region {
+	NOROESTE
+	NORDESTE
+	PAMPEANA
+	CUYO
+	PATAGONIA   
+}

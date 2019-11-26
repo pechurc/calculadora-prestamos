@@ -5,8 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.eiv.converters.GeneroConverter;
-import com.eiv.enums.GeneroEnum;
 import com.eiv.repositories.ProvinciaRepository;
 
 @SpringBootApplication
