@@ -26,6 +26,20 @@ public class LocalidadEntity {
     @JoinColumn(name = "id_provincia", referencedColumnName = "id_provincia")
     private ProvinciaEntity provincia;
     
+    public LocalidadEntity() {
+        
+    }
+
+    public LocalidadEntity(Integer id, String nombre, String codigoPostal, 
+            ProvinciaEntity provincia) {
+        
+        super();
+        this.id = id;
+        this.nombre = nombre;
+        this.codigoPostal = codigoPostal;
+        this.provincia = provincia;
+    }
+
     public Integer getId() {
         return id;
     }

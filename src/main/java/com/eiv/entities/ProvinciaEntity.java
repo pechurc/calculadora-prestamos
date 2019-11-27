@@ -22,6 +22,13 @@ public class ProvinciaEntity {
     private RegionEnum region;
        
     public ProvinciaEntity() { }
+    
+    public ProvinciaEntity(Integer id, String nombre, RegionEnum region) {
+        
+        this.id = id;
+        this.nombre = nombre;
+        this.region = region;
+    }
 
     public Integer getId() {
         return id;
