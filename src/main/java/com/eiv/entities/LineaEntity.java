@@ -59,6 +59,24 @@ public class LineaEntity {
 
     public LineaEntity() { }
     
+    public LineaEntity(Integer id, UsuarioEntity usuario, String nombre, 
+            BigDecimal tasaMin, BigDecimal tasaMax, Integer cuotasMin, Integer cuotasMax, 
+            BigDecimal capitalMin, BigDecimal capitalMax, LocalDate fechaAlta, 
+            SistemaAmortizacionEnum sistemaAmortizacion) {
+        super();
+        this.id = id;
+        this.usuario = usuario;
+        this.nombre = nombre;
+        this.tasaMin = tasaMin;
+        this.tasaMax = tasaMax;
+        this.cuotasMin = cuotasMin;
+        this.cuotasMax = cuotasMax;
+        this.capitalMin = capitalMin;
+        this.capitalMax = capitalMax;
+        this.fechaAlta = fechaAlta;
+        this.sistemaAmortizacion = sistemaAmortizacion;
+    }
+    
     public Integer getId() {
         return id;
     }
