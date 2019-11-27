@@ -17,6 +17,11 @@ public class PrestamoCuotaPk implements Serializable {
     private Integer nroCuota;
     
     public PrestamoCuotaPk() { }
+    
+    public PrestamoCuotaPk(Integer prestamoId, Integer nroCuota) { 
+        this.prestamoId = prestamoId;
+        this.nroCuota = nroCuota;
+    }
 
     public Integer getPrestamoId() {
         return prestamoId;

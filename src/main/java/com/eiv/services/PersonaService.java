@@ -2,10 +2,9 @@ package com.eiv.services;
 
 import java.util.function.Supplier;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eiv.entities.LocalidadEntity;
 import com.eiv.entities.PersonaEntity;
@@ -27,8 +26,16 @@ public class PersonaService {
     @Autowired
     private LocalidadService localidadService;
     
+    @Transactional(readOnly = true)
+    public PersonaEntity getById(PersonaPkEntity pk) {
+        
+        return personaRepository
+                .findById(pk)
+                .orElseThrow(exceptionSupplier(pk));
+    }
+    
     @Transactional
-    public PersonaEntity nueva(IPersona persona) {
+    public PersonaEntity save(IPersona persona) {
         
         PersonaEntity personaEntity = new PersonaEntity();
         
@@ -52,11 +59,11 @@ public class PersonaService {
     }
     
     @Transactional
-    public PersonaEntity actualizar(PersonaPkEntity personaPk, IPersona persona) {
+    public PersonaEntity update(PersonaPkEntity pk, IPersona persona) {
 
         PersonaEntity personaEntity = personaRepository
-                .findById(personaPk)
-                .orElseThrow(exceptionSupplier(personaPk));
+                .findById(pk)
+                .orElseThrow(exceptionSupplier(pk));
         
         LocalidadEntity localidad = localidadService.getById(persona.getLocalidadId());        
         
@@ -74,7 +81,7 @@ public class PersonaService {
     }
     
     @Transactional
-    public void borrar(PersonaPkEntity personaPk) {
+    public void delete(PersonaPkEntity personaPk) {
      
         PersonaEntity personaEntity = personaRepository
                 .findById(personaPk)
@@ -86,7 +93,6 @@ public class PersonaService {
     // TODO: modificar esto para que quede mejor
     private Supplier<? extends RuntimeException> exceptionSupplier(PersonaPkEntity id) {
         
-        return ExceptionUtils.notFoundExceptionSupplier("Persona con ID=%s no encontrada", 
-                id.getNumeroDocumento().intValue());
+        return ExceptionUtils.notFoundExceptionSupplier("Persona con ID=%s no encontrada", id);
     }
 }

@@ -130,7 +130,7 @@ public class LineaEntity {
     public void setFechaAlta(LocalDate fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
-
+    
     public UsuarioEntity getUsuario() {
         return usuario;
     }
@@ -147,7 +147,6 @@ public class LineaEntity {
         this.sistemaAmortizacion = sistemaAmortizacion;
     }
 
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -165,7 +164,6 @@ public class LineaEntity {
         return result;
     }
 
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -253,7 +251,6 @@ public class LineaEntity {
         return true;
     }
 
-    @Override
     public String toString() {
         return "LineaEntity [id=" + id + ", nombre=" + nombre + ", fechaAlta=" + fechaAlta 
                 + ", usuario=" + usuario + "]";

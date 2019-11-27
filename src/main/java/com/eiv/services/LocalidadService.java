@@ -30,7 +30,7 @@ public class LocalidadService {
      }
      
      @Transactional
-     public LocalidadEntity nueva(ILocalidad localidad) {
+     public LocalidadEntity save(ILocalidad localidad) {
          
          ProvinciaEntity provinciaEntity = provinciaService.getById(localidad.getProvinciaId());
          
@@ -48,7 +48,7 @@ public class LocalidadService {
      }
      
      @Transactional
-     public LocalidadEntity actualizar(Integer id, ILocalidad localidad) {
+     public LocalidadEntity update(Integer id, ILocalidad localidad) {
          
          ProvinciaEntity provinciaEntity = provinciaService.getById(localidad.getProvinciaId());
          LocalidadEntity localidadEntity = localidadRepository
@@ -65,7 +65,7 @@ public class LocalidadService {
      }
      
      @Transactional
-     public void borrar(Integer id) {
+     public void delete(Integer id) {
          
          LocalidadEntity localidadEntity = localidadRepository
                  .findById(id)

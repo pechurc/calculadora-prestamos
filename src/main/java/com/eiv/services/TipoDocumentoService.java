@@ -26,7 +26,7 @@ public class TipoDocumentoService {
     }
     
     @Transactional
-    public TipoDocumentoEntity nuevo(ITipoDocumento tipoDocumento) {
+    public TipoDocumentoEntity save(ITipoDocumento tipoDocumento) {
         
         Integer id = tipoDocumentoRepository.getMax().orElse(0) + 1;
         TipoDocumentoEntity tipoDocumentoEntity = new TipoDocumentoEntity();
@@ -42,7 +42,7 @@ public class TipoDocumentoService {
     }
     
     @Transactional
-    public TipoDocumentoEntity actualizar(Integer id, ITipoDocumento tipoDocumento) {
+    public TipoDocumentoEntity update(Integer id, ITipoDocumento tipoDocumento) {
         
         TipoDocumentoEntity tipoDocumentoEntity = tipoDocumentoRepository
                 .findById(id)
@@ -58,7 +58,7 @@ public class TipoDocumentoService {
     }
     
     @Transactional
-    public void borrar(Integer id) {
+    public void delete(Integer id) {
         
         TipoDocumentoEntity tipoDocumentoEntity = tipoDocumentoRepository
                 .findById(id)

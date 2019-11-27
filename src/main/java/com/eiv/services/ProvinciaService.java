@@ -30,7 +30,7 @@ public class ProvinciaService {
     }
     
     @Transactional
-    public ProvinciaEntity nueva(IProvincia provincia) {
+    public ProvinciaEntity save(IProvincia provincia) {
         
         Integer id = provinciaRepository.getMax().orElse(0) + 1;
         ProvinciaEntity provinciaEntity = new ProvinciaEntity();
@@ -45,7 +45,7 @@ public class ProvinciaService {
     }
     
     @Transactional
-    public ProvinciaEntity actualizar(Integer id, IProvincia provincia) {
+    public ProvinciaEntity update(Integer id, IProvincia provincia) {
         
         ProvinciaEntity provinciaEntity = provinciaRepository
                 .findById(id)
@@ -60,7 +60,7 @@ public class ProvinciaService {
     }
     
     @Transactional
-    public void borrar(Integer id) {
+    public void delete(Integer id) {
         
         ProvinciaEntity provinciaEntity = provinciaRepository
                 .findById(id)

@@ -11,4 +11,10 @@ public class ExceptionUtils {
         
         return () -> new NotFoundServiceException(message, id);
     }
+    
+    public static Supplier<? extends RuntimeException> notFoundExceptionSupplier(String message, 
+            Object obj) {
+        
+        return () -> new NotFoundServiceException(message, obj);
+    }
 }
