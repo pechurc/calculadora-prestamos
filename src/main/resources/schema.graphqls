@@ -4,11 +4,11 @@ schema{
 
 type Query {
 	provincias: [Provincia]
-  	provincia(id: ID): Provincia
+  	provincia(id: Int): Provincia
 }
 
 type Provincia {
-  	id: ID
+  	id: Int
   	nombre: String
   	region: Region
 }
