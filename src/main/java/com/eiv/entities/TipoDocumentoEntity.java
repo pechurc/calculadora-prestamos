@@ -22,6 +22,19 @@ public class TipoDocumentoEntity {
     @Column(name = "validar_como_cuit", nullable = false)
     private Boolean validarComoCuit;
 
+    public TipoDocumentoEntity() {
+        
+    }
+    
+    public TipoDocumentoEntity(Integer id, String nombre, String abreviatura, 
+            Boolean validarComoCuit) {
+        super();
+        this.id = id;
+        this.nombre = nombre;
+        this.abreviatura = abreviatura;
+        this.validarComoCuit = validarComoCuit;
+    }
+
     public Integer getId() {
         return id;
     }

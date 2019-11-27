@@ -36,6 +36,13 @@ public class UsuarioEntity {
         this.nombreUsuario = nombreUsuario;
         this.hashedPwd = hashed_pwd;
     }
+    
+    public UsuarioEntity(PersonaEntity persona, String nombreUsuario, String hashed_pwd) {
+        this.persona = persona;
+        this.pk = persona.getId();
+        this.nombreUsuario = nombreUsuario;
+        this.hashedPwd = hashed_pwd;
+    }
 
     public PersonaPkEntity getId() {
         return pk;
@@ -51,14 +58,6 @@ public class UsuarioEntity {
     
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
-    }
-    
-    public String getHashed_pwd() {
-        return hashedPwd;
-    }
-    
-    public void setHashed_pwd(String hashed_pwd) {
-        this.hashedPwd = hashed_pwd;
     }
 
     public String getHashedPwd() {

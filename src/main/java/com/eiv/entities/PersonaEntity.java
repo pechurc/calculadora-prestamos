@@ -53,9 +53,31 @@ public class PersonaEntity {
     
     @Lob @Basic(fetch = FetchType.LAZY)
     @Column(name = "foto_cara")
-    private Byte[] foto_cara;
+    private Byte[] fotoCara;
     
     public PersonaEntity() { }
+
+    
+    
+    public PersonaEntity(PersonaPkEntity id, Long numeroDocumento, 
+            TipoDocumentoEntity tipoDocumento, String nombreApellido, LocalDate fechaNacimiento,
+            String correoElectronico, Boolean esArgentino,  LocalidadEntity localidad, 
+            String codigoPostal, GeneroEnum genero, Byte[] fotoCara) {
+        super();
+        this.id = id;
+        this.numeroDocumento = numeroDocumento;
+        this.tipoDocumento = tipoDocumento;
+        this.nombreApellido = nombreApellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correoElectronico = correoElectronico;
+        this.esArgentino = esArgentino;
+        this.localidad = localidad;
+        this.codigoPostal = codigoPostal;
+        this.genero = genero;
+        this.fotoCara = fotoCara;
+    }
+
+
 
     public PersonaPkEntity getId() {
         return id;
@@ -121,12 +143,12 @@ public class PersonaEntity {
         this.genero = genero;
     }
 
-    public Byte[] getFoto_cara() {
-        return foto_cara;
+    public Byte[] getFotoCara() {
+        return fotoCara;
     }
 
-    public void setFoto_cara(Byte[] foto_cara) {
-        this.foto_cara = foto_cara;
+    public void setFotoCara(Byte[] fotoCara) {
+        this.fotoCara = fotoCara;
     }
     
     public Long getNumeroDocumento() {

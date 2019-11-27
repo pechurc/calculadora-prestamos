@@ -76,6 +76,6 @@ public class UsuarioService {
     
     private Supplier<? extends RuntimeException> exceptionSupplier(PersonaPkEntity id) {
         
-        return ExceptionUtils.notFoundExceptionSupplier("Persona con ID=%s no encontrada", id);
+        return ExceptionUtils.notFoundExceptionSupplier("Usuario con ID=%s no encontrada", id);
     }    
 }
