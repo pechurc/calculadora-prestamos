@@ -108,4 +108,30 @@ public class LocalidadServiceTest {
         Mockito.verify(localidadRepository).findById(Mockito.eq(0));
         Mockito.verify(localidadRepository, never()).delete(Mockito.any(LocalidadEntity.class));
     }
+    
+    @Test
+    public void givenLocalidadId_whenExists_thenReturnLocalidadEntity() {
+        
+        Mockito.when(localidadRepository.findById(Mockito.anyInt()))
+                .thenReturn(Optional.of(new LocalidadEntity(0, "ORIGINAL", "2000",
+                        new ProvinciaEntity(1, "ProvinciaTest", RegionEnum.CUYO))));
+        
+        LocalidadEntity localidadEntity = localidadService.getById(1);
+        
+        assertThat(localidadEntity.getId()).isEqualTo(0L);
+        assertThat(localidadEntity.getNombre()).isEqualTo("ORIGINAL");
+        assertThat(localidadEntity.getProvincia().getNombre()).isEqualTo("ProvinciaTest");
+    }
+    
+    @Test
+    public void givenLocalidadId_whenNonExists_thenThrowNotFoundServiceException() {
+
+        Throwable throwable = catchThrowable(() -> localidadService.getById(0));
+        
+        assertThat(throwable)
+                .isInstanceOf(NotFoundServiceException.class)
+                .hasMessageContaining("Localidad con ID=0 no encontrada");
+
+        Mockito.verify(localidadRepository).findById(Mockito.eq(0));
+    }
 }

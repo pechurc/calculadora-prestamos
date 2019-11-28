@@ -95,4 +95,30 @@ public class ProvinciaServiceTest {
         Mockito.verify(provinciaRepository).findById(Mockito.eq(0));
         Mockito.verify(provinciaRepository, never()).delete(Mockito.any(ProvinciaEntity.class));
     }
+    
+    @Test
+    public void givenProvinciaId_whenExists_thenReturnProvinciaEntity() {
+
+        Mockito.when(provinciaRepository
+                .findById(Mockito.eq(0)))
+                .thenReturn(Optional.of(new ProvinciaEntity(0, "TEST", RegionEnum.NOROESTE)));
+        
+        ProvinciaEntity provinciaEntity = provinciaService.getById(0);
+        
+        assertThat(provinciaEntity.getId()).isEqualTo(0L);
+        assertThat(provinciaEntity.getNombre()).isEqualTo("TEST");
+        assertThat(provinciaEntity.getRegion()).isEqualTo(RegionEnum.NOROESTE);
+    }
+    
+    @Test
+    public void givenProvinciaId_whenNonExists_thenThrowNotFoundServiceException() {
+
+        Throwable throwable = catchThrowable(() -> provinciaService.getById(0));
+        
+        assertThat(throwable)
+                .isInstanceOf(NotFoundServiceException.class)
+                .hasMessageContaining("Provincia con ID=0 no encontrada");
+
+        Mockito.verify(provinciaRepository).findById(Mockito.eq(0));
+    }
 }

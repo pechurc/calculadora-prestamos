@@ -33,7 +33,22 @@ public class PrestamoCuotaEntity {
     @Column(name = "importe_total", nullable = false)
     private BigDecimal importeTotal;
 
-    public PrestamoCuotaEntity() { }
+    public PrestamoCuotaEntity() { 
+        
+    }
+
+    public PrestamoCuotaEntity(PrestamoCuotaPk id, PrestamoEntity prestamo, Integer nroCuota, 
+            BigDecimal importeCapital, BigDecimal importeIntereses, BigDecimal importeTotal) {
+        super();
+        this.id = id;
+        this.prestamo = prestamo;
+        this.nroCuota = nroCuota;
+        this.importeCapital = importeCapital;
+        this.importeIntereses = importeIntereses;
+        this.importeTotal = importeTotal;
+    }
+
+
 
     public PrestamoCuotaPk getId() {
         return id;

@@ -101,4 +101,17 @@ public class TipoDocumentoServiceTest {
         Mockito.verify(tipoDocumentoRepository, never())
         .delete(Mockito.any(TipoDocumentoEntity.class));
     }
+    
+    @Test
+    public void givenTipoDocumentoId_whenExists_thenReturnLocalidadEntity() {
+        
+        when(tipoDocumentoRepository.findById(1))
+        .thenReturn(Optional.of(new TipoDocumentoEntity(1, "DNI", "DNI", false)));
+        
+        TipoDocumentoEntity tipoDocumentoEntity = tipoDocumentoService.getById(1);
+        
+        assertThat(tipoDocumentoEntity.getId()).isEqualTo(1L);
+        assertThat(tipoDocumentoEntity.getNombre()).isEqualTo("DNI");
+        assertThat(tipoDocumentoEntity.getAbreviatura()).isEqualTo("DNI");
+    }
 }

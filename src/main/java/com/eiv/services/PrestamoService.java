@@ -46,6 +46,7 @@ public class PrestamoService {
         prestamoEntity.setTeaModulo(prestamo.getTeaModulo());
         prestamoEntity.setCapitalPrestado(prestamo.getCapitalPrestado());
         prestamoEntity.setTotalIntereses(prestamo.getTotalIntereses());
+        prestamoEntity.setFechaAlta(prestamo.getFechaAlta());
         
         prestamoRepository.save(prestamoEntity);
         

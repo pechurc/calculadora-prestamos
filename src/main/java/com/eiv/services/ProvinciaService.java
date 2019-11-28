@@ -1,6 +1,5 @@
 package com.eiv.services;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,7 @@ public class ProvinciaService {
 
     @Autowired
     private ProvinciaRepository provinciaRepository;
-    
-    @Transactional(readOnly = true)
-    public Optional<ProvinciaEntity> findById(Integer id) {
-        return provinciaRepository.findById(id);
-    }
-    
+
     @Transactional(readOnly = true)
     public ProvinciaEntity getById(Integer id) {
         return provinciaRepository.findById(id)

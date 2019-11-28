@@ -136,7 +136,7 @@ public class LineaServiceTest {
     }
     
     @Test
-    public void givenProvinciaId_whenDeleteNonExist_thenThrowException() {
+    public void givenLineaId_whenDeleteNonExist_thenThrowException() {
 
         Throwable throwable = catchThrowable(() -> lineaService.delete(1));
         
@@ -146,5 +146,19 @@ public class LineaServiceTest {
 
         Mockito.verify(lineaRepository).findById(Mockito.eq(1));
         Mockito.verify(lineaRepository, never()).delete(Mockito.any(LineaEntity.class));
+    }
+    
+    @Test
+    public void givenLineaId_whenExists_thenReturnLocalidadEntity() {
+        
+        when(lineaRepository.findById(1)).thenReturn(Optional.of(new LineaEntity(1, null, 
+                "TEST!",  BigDecimal.valueOf(1.1f), BigDecimal.valueOf(1.2f), 1, 12, 
+                BigDecimal.valueOf(100d), BigDecimal.valueOf(1000d), LocalDate.of(2019, 11, 27), 
+                SistemaAmortizacionEnum.AMERICANO))); 
+        
+        LineaEntity lineaEntity = lineaService.getById(1);
+        
+        assertThat(lineaEntity.getId()).isEqualTo(1L);
+        assertThat(lineaEntity.getNombre()).isEqualTo("TEST!");
     }
 }

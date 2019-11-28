@@ -110,7 +110,7 @@ public class UsuarioServiceTest {
     }
     
     @Test
-    public void givenProvinciaId_whenDeleteNonExist_thenThrowException() {
+    public void givenUsuarioId_whenDeleteNonExist_thenThrowException() {
 
         PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
         Throwable throwable = catchThrowable(() -> usuarioService.delete(personaPk));
@@ -122,5 +122,23 @@ public class UsuarioServiceTest {
 
         Mockito.verify(usuarioRepository).findById(Mockito.eq(personaPk));
         Mockito.verify(usuarioRepository, never()).delete(Mockito.any(UsuarioEntity.class));
+    }
+
+    @Test
+    public void givenUsuarioId_whenExists_thenReturnLocalidadEntity() {
+        
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, null, 
+                "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
+                "2000SC", GeneroEnum.MASCULINO, null);
+        
+        Mockito.when(usuarioRepository.findById(personaPk))
+        .thenReturn(Optional.of(new UsuarioEntity(personaEntity, "juantes", "asdqwe")));
+        
+        UsuarioEntity usuarioEntity = usuarioService.getById(personaPk);
+        
+        assertThat(usuarioEntity.getId()).isEqualTo(personaPk);
+        assertThat(usuarioEntity.getNombreUsuario()).isEqualTo("juantes");
+        assertThat(usuarioEntity.getHashedPwd()).isEqualTo("asdqwe");
     }
 }

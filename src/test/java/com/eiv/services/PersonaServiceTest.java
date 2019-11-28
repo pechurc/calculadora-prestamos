@@ -155,4 +155,24 @@ public class PersonaServiceTest {
         Mockito.verify(personaRepository).findById(Mockito.eq(personaPk));
         Mockito.verify(personaRepository, never()).delete(Mockito.any(PersonaEntity.class));
     }
+    
+    @Test
+    public void givenPersonaId_whenExists_thenPersonaEntityReturned() {
+        
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);     
+
+        Mockito.when(personaRepository.findById(personaPk))
+        .thenReturn(Optional.of(new PersonaEntity(personaPk, 12345678L, null, 
+                "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
+                "2000SC", GeneroEnum.MASCULINO, null)));
+        
+        PersonaEntity personaEntity = personaService.getById(personaPk);
+        
+        assertThat(personaEntity.getNumeroDocumento()).isEqualTo(12345678L);
+        assertThat(personaEntity.getCodigoPostal()).isEqualTo("2000SC");
+        assertThat(personaEntity.getCorreoElectronico()).isEqualTo("test@tester.com");
+        assertThat(personaEntity.getFechaNacimiento()).isEqualTo(LocalDate.of(1990, 4, 4));
+        assertThat(personaEntity.getEsArgentino()).isEqualTo(true);
+        assertThat(personaEntity.getGenero()).isEqualTo(GeneroEnum.MASCULINO);
+    }
 }

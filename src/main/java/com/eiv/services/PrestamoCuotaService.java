@@ -22,6 +22,14 @@ public class PrestamoCuotaService {
     @Autowired
     private PrestamoCuotaRepository prestamoCuotaRepository;
     
+    @Transactional(readOnly = true)
+    public PrestamoCuotaEntity getById(PrestamoCuotaPk pk) {
+        
+        return prestamoCuotaRepository
+            .findById(pk)
+            .orElseThrow(exceptionSupplier(pk));
+    }
+    
     @Transactional
     public PrestamoCuotaEntity save(IPrestamoCuota prestamoCuota) {
         

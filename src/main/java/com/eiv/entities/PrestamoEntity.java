@@ -42,6 +42,19 @@ public class PrestamoEntity {
     
     @Column(name = "total_intereses")
     private BigDecimal totalIntereses;
+    
+    public PrestamoEntity(Long id, UsuarioEntity usuario, LocalDate fechaAlta, 
+            BigDecimal tea, BigDecimal teaModulo, BigDecimal capitalPrestado,
+            BigDecimal totalIntereses) {
+        super();
+        this.id = id;
+        this.fechaAlta = fechaAlta;
+        this.usuario = usuario;
+        this.tea = tea;
+        this.teaModulo = teaModulo;
+        this.capitalPrestado = capitalPrestado;
+        this.totalIntereses = totalIntereses;
+    }
 
     public PrestamoEntity() { }
     
