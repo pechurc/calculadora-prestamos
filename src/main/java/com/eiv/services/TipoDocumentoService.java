@@ -18,7 +18,7 @@ public class TipoDocumentoService {
     private TipoDocumentoRepository tipoDocumentoRepository;
     
     @Transactional(readOnly = true)
-    public TipoDocumentoEntity getById(Integer id) {
+    public TipoDocumentoEntity getById(Long id) {
         
         return tipoDocumentoRepository
                 .findById(id)
@@ -28,7 +28,7 @@ public class TipoDocumentoService {
     @Transactional
     public TipoDocumentoEntity save(ITipoDocumento tipoDocumento) {
         
-        Integer id = tipoDocumentoRepository.getMax().orElse(0) + 1;
+        Long id = tipoDocumentoRepository.getMax().orElse(0L) + 1L;
         TipoDocumentoEntity tipoDocumentoEntity = new TipoDocumentoEntity();
         
         tipoDocumentoEntity.setId(id);
@@ -42,7 +42,7 @@ public class TipoDocumentoService {
     }
     
     @Transactional
-    public TipoDocumentoEntity update(Integer id, ITipoDocumento tipoDocumento) {
+    public TipoDocumentoEntity update(Long id, ITipoDocumento tipoDocumento) {
         
         TipoDocumentoEntity tipoDocumentoEntity = tipoDocumentoRepository
                 .findById(id)
@@ -58,7 +58,7 @@ public class TipoDocumentoService {
     }
     
     @Transactional
-    public void delete(Integer id) {
+    public void delete(Long id) {
         
         TipoDocumentoEntity tipoDocumentoEntity = tipoDocumentoRepository
                 .findById(id)
@@ -67,7 +67,7 @@ public class TipoDocumentoService {
         tipoDocumentoRepository.delete(tipoDocumentoEntity);
     }
     
-    private Supplier<? extends RuntimeException> exceptionSupplier(Integer id) {
+    private Supplier<? extends RuntimeException> exceptionSupplier(Long id) {
         
         return ExceptionUtils.notFoundExceptionSupplier("Tipo documento con ID=%s no encontrada", id);
     }

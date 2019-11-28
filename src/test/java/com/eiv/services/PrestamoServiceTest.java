@@ -39,13 +39,13 @@ public class PrestamoServiceTest {
     @Test
     public void givenPrestamoDto_whenCreate_thenPrestamoEntityCreated() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(1L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(1L, 1L);
         when(usuarioService.getById(personaPk))
         .thenReturn(new UsuarioEntity(personaPk, "test", "test_pwd"));
         when(prestamoRepository.getMax()).thenReturn(Optional.of(0L));
         
         PrestamoEntity prestamoEntity = prestamoService.save(
-                new PrestamoDto(1L, 1, LocalDate.now(), new BigDecimal("1"), new BigDecimal("1"),
+                new PrestamoDto(1L, 1L, LocalDate.now(), new BigDecimal("1"), new BigDecimal("1"),
                         new BigDecimal("1000"), new BigDecimal("2000")));
         
         assertThat(prestamoEntity.getFechaAlta()).isEqualTo(LocalDate.now());
@@ -63,7 +63,7 @@ public class PrestamoServiceTest {
                 new BigDecimal("1000"), new BigDecimal("2000"))));
         
         PrestamoEntity prestamoEntity = prestamoService.update(1L, 
-                new PrestamoDto(1L, 1, LocalDate.now(), new BigDecimal("2"), new BigDecimal("2"),
+                new PrestamoDto(1L, 1L, LocalDate.now(), new BigDecimal("2"), new BigDecimal("2"),
                         new BigDecimal("2000"), new BigDecimal("3000")));
         
         assertThat(prestamoEntity.getFechaAlta()).isEqualTo(LocalDate.now());

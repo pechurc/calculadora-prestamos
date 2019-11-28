@@ -8,7 +8,7 @@ public interface IPersona {
     
     public Long getNumeroDocumento();
     
-    public Integer getTipoDocumentoId();
+    public Long getTipoDocumentoId();
     
     public String getNombreApellido();
     
@@ -16,7 +16,7 @@ public interface IPersona {
     
     public Boolean esArgentino();
     
-    public Integer getLocalidadId();
+    public Long getLocalidadId();
     
     public String getCodigoPostal();
     

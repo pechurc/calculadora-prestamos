@@ -9,7 +9,7 @@ import com.eiv.interfaces.ILinea;
 public class LineaDto implements ILinea {
 
     private Long numeroDocumento;
-    private Integer tipoDocumentoId;
+    private Long tipoDocumentoId;
     private String nombre;
     private BigDecimal tasaMin;
     private BigDecimal tasaMax;
@@ -24,7 +24,7 @@ public class LineaDto implements ILinea {
         
     }
     
-    public LineaDto(Long numeroDocumento, Integer tipoDocumentoId, String nombre, 
+    public LineaDto(Long numeroDocumento, Long tipoDocumentoId, String nombre, 
             BigDecimal tasaMin, BigDecimal tasaMax, Integer cuotasMin, Integer cuotasMax, 
             BigDecimal capitalMin, BigDecimal capitalMax, LocalDate fechaAlta, 
             SistemaAmortizacionEnum sistemaAmortizacion) {
@@ -48,7 +48,7 @@ public class LineaDto implements ILinea {
     }
 
     @Override
-    public Integer getTipoDocumentoId() {
+    public Long getTipoDocumentoId() {
         return tipoDocumentoId;
     }
 

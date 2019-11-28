@@ -8,19 +8,19 @@ import com.eiv.interfaces.IPersona;
 public class PersonaDto implements IPersona {
     
     private Long numeroDocumento;
-    private Integer tipoDocumentoId;    
+    private Long tipoDocumentoId;    
     private String nombreApellido;
     private LocalDate fechaNacimiento;
     private String correoElectronico;
     private Boolean esArgentino;
-    private Integer localidadId;
+    private Long localidadId;
     private String codigoPostal;
     private GeneroEnum genero;
     private Byte[] fotoCara;
     
     
-    public PersonaDto(Long numeroDocumento, Integer tipoDocumentoId, String nombreApellido, LocalDate fechaNacimiento,
-            String correoElectronico, Boolean esArgentino, Integer localidadId, String codigoPostal, GeneroEnum genero,
+    public PersonaDto(Long numeroDocumento, Long tipoDocumentoId, String nombreApellido, LocalDate fechaNacimiento,
+            String correoElectronico, Boolean esArgentino, Long localidadId, String codigoPostal, GeneroEnum genero,
             Byte[] fotoCara) {
         super();
         this.numeroDocumento = numeroDocumento;
@@ -41,7 +41,7 @@ public class PersonaDto implements IPersona {
     }
 
     @Override
-    public Integer getTipoDocumentoId() {
+    public Long getTipoDocumentoId() {
         return tipoDocumentoId;
     }
 
@@ -61,7 +61,7 @@ public class PersonaDto implements IPersona {
     }
 
     @Override
-    public Integer getLocalidadId() {
+    public Long getLocalidadId() {
         return localidadId;
     }
 

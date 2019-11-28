@@ -5,11 +5,11 @@ import com.eiv.interfaces.IUsuario;
 public class UsuarioDto implements IUsuario {
 
     private Long numeroDocumento;
-    private Integer tipoDocumentoId;
+    private Long tipoDocumentoId;
     private String nombreUsuario;
     private String hashedPwd;
     
-    public UsuarioDto(Long numeroDocumento, Integer tipoDocumentoId, String nombreUsuario, 
+    public UsuarioDto(Long numeroDocumento, Long tipoDocumentoId, String nombreUsuario, 
             String hashedPwd) {
         super();
         this.numeroDocumento = numeroDocumento;
@@ -24,7 +24,7 @@ public class UsuarioDto implements IUsuario {
     }
 
     @Override
-    public Integer getTipoDocumentoId() {
+    public Long getTipoDocumentoId() {
         return tipoDocumentoId;
     }
 

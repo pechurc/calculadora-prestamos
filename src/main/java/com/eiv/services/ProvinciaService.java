@@ -18,7 +18,7 @@ public class ProvinciaService {
     private ProvinciaRepository provinciaRepository;
 
     @Transactional(readOnly = true)
-    public ProvinciaEntity getById(Integer id) {
+    public ProvinciaEntity getById(Long id) {
         return provinciaRepository.findById(id)
                 .orElseThrow(exceptionSupplier(id));
     }
@@ -26,7 +26,7 @@ public class ProvinciaService {
     @Transactional
     public ProvinciaEntity save(IProvincia provincia) {
         
-        Integer id = provinciaRepository.getMax().orElse(0) + 1;
+        Long id = provinciaRepository.getMax().orElse(0L) + 1L;
         ProvinciaEntity provinciaEntity = new ProvinciaEntity();
         
         provinciaEntity.setId(id);
@@ -39,7 +39,7 @@ public class ProvinciaService {
     }
     
     @Transactional
-    public ProvinciaEntity update(Integer id, IProvincia provincia) {
+    public ProvinciaEntity update(Long id, IProvincia provincia) {
         
         ProvinciaEntity provinciaEntity = provinciaRepository
                 .findById(id)
@@ -54,7 +54,7 @@ public class ProvinciaService {
     }
     
     @Transactional
-    public void delete(Integer id) {
+    public void delete(Long id) {
         
         ProvinciaEntity provinciaEntity = provinciaRepository
                 .findById(id)
@@ -63,7 +63,7 @@ public class ProvinciaService {
         provinciaRepository.delete(provinciaEntity);
     }
     
-    private Supplier<? extends RuntimeException> exceptionSupplier(Integer id) {
+    private Supplier<? extends RuntimeException> exceptionSupplier(Long id) {
         
         return ExceptionUtils.notFoundExceptionSupplier("Provincia con ID=%s no encontrada", id);
     }

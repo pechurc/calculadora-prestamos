@@ -38,7 +38,7 @@ public class UsuarioServiceTest {
     @Test
     public void givenUsuarioDto_whenCreate_thenUsuarioEntityCreated() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         
         PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, null, 
                 "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
@@ -48,7 +48,7 @@ public class UsuarioServiceTest {
         .thenReturn(personaEntity);
         
         UsuarioEntity usuarioEntity = usuarioService
-                .save(new UsuarioDto(12345678L, 1, "juantes", "asdqwe"));
+                .save(new UsuarioDto(12345678L, 1L, "juantes", "asdqwe"));
         
         assertThat(usuarioEntity.getHashedPwd()).isEqualTo("asdqwe");
         assertThat(usuarioEntity.getNombreUsuario()).isEqualTo("juantes");
@@ -58,7 +58,7 @@ public class UsuarioServiceTest {
     @Test
     public void givenUsuarioDto_whenUpdate_thenUsuarioEntityUpdated() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         
         PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, null, 
                 "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
@@ -68,7 +68,7 @@ public class UsuarioServiceTest {
         .thenReturn(Optional.of( new UsuarioEntity(personaEntity, "juantes", "asdqwe")));
 
         UsuarioEntity usuarioEntity = usuarioService
-                .update(personaPk, new UsuarioDto(12345678L, 1, "juantes2", "asdqwe4"));
+                .update(personaPk, new UsuarioDto(12345678L, 1L, "juantes2", "asdqwe4"));
         
         assertThat(usuarioEntity.getHashedPwd()).isEqualTo("asdqwe4");
         assertThat(usuarioEntity.getNombreUsuario()).isEqualTo("juantes2");
@@ -78,9 +78,9 @@ public class UsuarioServiceTest {
     @Test
     public void givenUsuarioDto_whenUpdateNonExists_thenThrowNotFoundServiceException() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         
-        UsuarioDto usuarioDto = new UsuarioDto(12345678L, 1, "juantes", "asdqwe");
+        UsuarioDto usuarioDto = new UsuarioDto(12345678L, 1L, "juantes", "asdqwe");
 
         Throwable throwable = catchThrowable(() -> usuarioService.update(personaPk, usuarioDto));
         
@@ -93,7 +93,7 @@ public class UsuarioServiceTest {
     @Test
     public void givenPersonaPk_thenDetele() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);      
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);      
         
         PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, null, 
                 "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
@@ -112,7 +112,7 @@ public class UsuarioServiceTest {
     @Test
     public void givenUsuarioId_whenDeleteNonExist_thenThrowException() {
 
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         Throwable throwable = catchThrowable(() -> usuarioService.delete(personaPk));
         
         assertThat(throwable)
@@ -127,7 +127,7 @@ public class UsuarioServiceTest {
     @Test
     public void givenUsuarioId_whenExists_thenReturnLocalidadEntity() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, null, 
                 "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
                 "2000SC", GeneroEnum.MASCULINO, null);

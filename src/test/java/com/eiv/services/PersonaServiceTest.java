@@ -43,15 +43,15 @@ public class PersonaServiceTest {
     @Test
     public void givenPersonaDto_whenCreate_thenPersonaEntityCreated() {
         
-        Mockito.when(localidadService.getById(1))
-        .thenReturn(new LocalidadEntity(1, "LocalidadTest", "2000",
-                new ProvinciaEntity(1, "ProvinciaTest", RegionEnum.CUYO)));
+        Mockito.when(localidadService.getById(1L))
+        .thenReturn(new LocalidadEntity(1L, "LocalidadTest", "2000",
+                new ProvinciaEntity(1L, "ProvinciaTest", RegionEnum.CUYO)));
         
-        Mockito.when(tipoDocumentoService.getById(1))
-        .thenReturn(new TipoDocumentoEntity(1, "DNI", "DNI", false));
+        Mockito.when(tipoDocumentoService.getById(1L))
+        .thenReturn(new TipoDocumentoEntity(1L, "DNI", "DNI", false));
 
-        PersonaDto personaDto = new PersonaDto(32569874L, 1, "Juan Tester", 
-                LocalDate.of(1990, 4, 4), "test@tester.com", true, 1, "2000SC",
+        PersonaDto personaDto = new PersonaDto(32569874L, 1L, "Juan Tester", 
+                LocalDate.of(1990, 4, 4), "test@tester.com", true, 1L, "2000SC",
                 GeneroEnum.MASCULINO, null);
         
         PersonaEntity personaEntity = personaService.save(personaDto);
@@ -69,26 +69,26 @@ public class PersonaServiceTest {
     @Test
     public void givenPersonaDto_whenUpdate_thenPersonaEntityUpdated() {
         
-        LocalidadEntity localidad = new LocalidadEntity(1, "LocalidadTest", "2000",
-                new ProvinciaEntity(1, "ProvinciaTest", RegionEnum.CUYO));
+        LocalidadEntity localidad = new LocalidadEntity(1L, "LocalidadTest", "2000",
+                new ProvinciaEntity(1L, "ProvinciaTest", RegionEnum.CUYO));
         
-        LocalidadEntity localidad2 = new LocalidadEntity(2, "Localidad2Test", "2000",
-                new ProvinciaEntity(2, "Provincia2Test", RegionEnum.CUYO));
+        LocalidadEntity localidad2 = new LocalidadEntity(2L, "Localidad2Test", "2000",
+                new ProvinciaEntity(2L, "Provincia2Test", RegionEnum.CUYO));
 
-        Mockito.when(localidadService.getById(2))
+        Mockito.when(localidadService.getById(2L))
         .thenReturn(localidad2);
         
-        TipoDocumentoEntity tipoDocumento = new TipoDocumentoEntity(1, "DNI", "DNI", false);
+        TipoDocumentoEntity tipoDocumento = new TipoDocumentoEntity(1L, "DNI", "DNI", false);
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         
         Mockito.when(personaRepository.findById(personaPk))
         .thenReturn(Optional.of(new PersonaEntity(personaPk, 12345678L, tipoDocumento, "Juan Tester",
                 LocalDate.of(1990, 4, 4), "test@tester.com", true, localidad, "2000SC",
                 GeneroEnum.MASCULINO, null)));
 
-        PersonaDto personaDto = new PersonaDto(12345678L, 1, "Juan Tester 2", 
-                LocalDate.of(1990, 5, 5), "mod@tester.com", true, 2, "2001SC",
+        PersonaDto personaDto = new PersonaDto(12345678L, 1L, "Juan Tester 2", 
+                LocalDate.of(1990, 5, 5), "mod@tester.com", true, 2L, "2001SC",
                 GeneroEnum.FEMENINO, null);
         
         PersonaEntity personaEntity = personaService.update(personaPk, personaDto);
@@ -106,10 +106,10 @@ public class PersonaServiceTest {
     @Test
     public void givenPersonaDto_whenUpdateNonExists_thenThrowNotFoundServiceException() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         
-        PersonaDto personaDto = new PersonaDto(12345678L, 1, "Juan Tester 2", 
-                LocalDate.of(1990, 5, 5), "mod@tester.com", true, 2, "2001SC",
+        PersonaDto personaDto = new PersonaDto(12345678L, 1L, "Juan Tester 2", 
+                LocalDate.of(1990, 5, 5), "mod@tester.com", true, 2L, "2001SC",
                 GeneroEnum.FEMENINO, null);
 
         Throwable throwable = catchThrowable(() -> personaService.update(personaPk, personaDto));
@@ -123,11 +123,11 @@ public class PersonaServiceTest {
     @Test
     public void givenPersonaPk_thenDetele() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);      
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);      
         
-        LocalidadEntity localidad = new LocalidadEntity(1, "LocalidadTest", "2000",
-                new ProvinciaEntity(1, "ProvinciaTest", RegionEnum.CUYO));
-        TipoDocumentoEntity tipoDocumento = new TipoDocumentoEntity(1, "DNI", "DNI", false);
+        LocalidadEntity localidad = new LocalidadEntity(1L, "LocalidadTest", "2000",
+                new ProvinciaEntity(1L, "ProvinciaTest", RegionEnum.CUYO));
+        TipoDocumentoEntity tipoDocumento = new TipoDocumentoEntity(1L, "DNI", "DNI", false);
         PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, tipoDocumento, 
                 "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, localidad, 
                 "2000SC", GeneroEnum.MASCULINO, null);
@@ -144,7 +144,7 @@ public class PersonaServiceTest {
     @Test
     public void givenProvinciaId_whenDeleteNonExist_thenThrowException() {
 
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);
         Throwable throwable = catchThrowable(() -> personaService.delete(personaPk));
         
         assertThat(throwable)
@@ -159,7 +159,7 @@ public class PersonaServiceTest {
     @Test
     public void givenPersonaId_whenExists_thenPersonaEntityReturned() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);     
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);     
 
         Mockito.when(personaRepository.findById(personaPk))
         .thenReturn(Optional.of(new PersonaEntity(personaPk, 12345678L, null, 

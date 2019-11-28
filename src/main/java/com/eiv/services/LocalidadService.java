@@ -22,7 +22,7 @@ public class LocalidadService {
      private ProvinciaService provinciaService;
 
      @Transactional(readOnly = true)
-     public LocalidadEntity getById(Integer id) {
+     public LocalidadEntity getById(Long id) {
          
          return localidadRepository
                  .findById(id)
@@ -34,7 +34,7 @@ public class LocalidadService {
          
          ProvinciaEntity provinciaEntity = provinciaService.getById(localidad.getProvinciaId());
          
-         Integer id = localidadRepository.getMax().orElse(0) + 1;
+         Long id = localidadRepository.getMax().orElse(0L) + 1L;
          LocalidadEntity localidadEntity = new LocalidadEntity();
          
          localidadEntity.setId(id);
@@ -48,7 +48,7 @@ public class LocalidadService {
      }
      
      @Transactional
-     public LocalidadEntity update(Integer id, ILocalidad localidad) {
+     public LocalidadEntity update(Long id, ILocalidad localidad) {
          
          ProvinciaEntity provinciaEntity = provinciaService.getById(localidad.getProvinciaId());
          LocalidadEntity localidadEntity = localidadRepository
@@ -65,7 +65,7 @@ public class LocalidadService {
      }
      
      @Transactional
-     public void delete(Integer id) {
+     public void delete(Long id) {
          
          LocalidadEntity localidadEntity = localidadRepository
                  .findById(id)
@@ -74,7 +74,7 @@ public class LocalidadService {
          localidadRepository.delete(localidadEntity);
      }
      
-     private Supplier<? extends RuntimeException> exceptionSupplier(Integer id) {
+     private Supplier<? extends RuntimeException> exceptionSupplier(Long id) {
          
          return ExceptionUtils.notFoundExceptionSupplier("Localidad con ID=%s no encontrada", id);
      }

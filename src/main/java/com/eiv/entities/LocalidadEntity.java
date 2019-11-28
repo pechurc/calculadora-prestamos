@@ -14,7 +14,7 @@ public class LocalidadEntity {
     
     @Id
     @Column(name = "id_localidad")
-    private Integer id;
+    private Long id;
     
     @Column(name = "nombre", length = 300, nullable = false)
     private String nombre;
@@ -30,7 +30,7 @@ public class LocalidadEntity {
         
     }
 
-    public LocalidadEntity(Integer id, String nombre, String codigoPostal, 
+    public LocalidadEntity(Long id, String nombre, String codigoPostal, 
             ProvinciaEntity provincia) {
         
         super();
@@ -40,11 +40,11 @@ public class LocalidadEntity {
         this.provincia = provincia;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -6,5 +6,5 @@ public interface ILocalidad {
     
     public String getCodigoPostal();
     
-    public Integer getProvinciaId();
+    public Long getProvinciaId();
 }

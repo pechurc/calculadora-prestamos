@@ -4,7 +4,7 @@ public interface IUsuario {
     
     public Long getNumeroDocumento();
     
-    public Integer getTipoDocumentoId();
+    public Long getTipoDocumentoId();
     
     public String getNombreUsuario();
     

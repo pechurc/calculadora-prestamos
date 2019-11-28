@@ -9,7 +9,7 @@ public interface ILinea {
     
     Long getNumeroDocumento();
     
-    Integer getTipoDocumentoId();
+    Long getTipoDocumentoId();
 
     String getNombre();
 

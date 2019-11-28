@@ -6,9 +6,9 @@ public class LocalidadDto implements ILocalidad {
 
     public String nombre;
     public String codigoPostal;
-    public Integer provinciaId;
+    public Long provinciaId;
     
-    public LocalidadDto(String nombre, String codigoPostal, Integer provinciaId) {
+    public LocalidadDto(String nombre, String codigoPostal, Long provinciaId) {
         
         this.nombre = nombre;
         this.codigoPostal = codigoPostal;
@@ -26,7 +26,7 @@ public class LocalidadDto implements ILocalidad {
     }
 
     @Override
-    public Integer getProvinciaId() {
+    public Long getProvinciaId() {
         return provinciaId;
     }
 

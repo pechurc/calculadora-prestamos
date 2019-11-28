@@ -7,7 +7,7 @@ public interface IPrestamo {
 
     public Long getNumeroDocumento();
     
-    public Integer getTipoDocumentoId();
+    public Long getTipoDocumentoId();
     
     public LocalDate getFechaAlta();
     

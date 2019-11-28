@@ -11,7 +11,7 @@ public class TipoDocumentoEntity {
 
     @Id
     @Column(name = "id_tipodocumento", nullable = false)
-    private Integer id;
+    private Long id;
     
     @Column(name = "nombre", nullable = false, unique = true)
     private String nombre;
@@ -26,7 +26,7 @@ public class TipoDocumentoEntity {
         
     }
     
-    public TipoDocumentoEntity(Integer id, String nombre, String abreviatura, 
+    public TipoDocumentoEntity(Long id, String nombre, String abreviatura, 
             Boolean validarComoCuit) {
         super();
         this.id = id;
@@ -35,11 +35,11 @@ public class TipoDocumentoEntity {
         this.validarComoCuit = validarComoCuit;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

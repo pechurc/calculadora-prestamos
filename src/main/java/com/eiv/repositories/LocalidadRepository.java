@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.eiv.entities.LocalidadEntity;
 
-public interface LocalidadRepository extends JpaRepository<LocalidadEntity, Integer> {
+public interface LocalidadRepository extends JpaRepository<LocalidadEntity, Long> {
     
     @Query("SELECT MAX(e.id) FROM LocalidadEntity e")
-    public Optional<Integer> getMax();
+    public Optional<Long> getMax();
 }

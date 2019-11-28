@@ -14,11 +14,11 @@ public class PersonaPkEntity implements Serializable {
     private Long numeroDocumento;
     
     @Column(name = "id_tipodocumento", nullable = false)
-    private Integer tipoDocumentoId;
+    private Long tipoDocumentoId;
 
     public PersonaPkEntity() { }
     
-    public PersonaPkEntity(Long numeroDocumento, Integer tipoDocumentoId) {
+    public PersonaPkEntity(Long numeroDocumento, Long tipoDocumentoId) {
         this.numeroDocumento = numeroDocumento;
         this.tipoDocumentoId = tipoDocumentoId;
     }
@@ -29,10 +29,10 @@ public class PersonaPkEntity implements Serializable {
     public void setNumeroDocumento(Long numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
-    public Integer getTipoDocumentoId() {
+    public Long getTipoDocumentoId() {
         return tipoDocumentoId;
     }
-    public void setTipoDocumentoId(Integer tipoDocumentoId) {
+    public void setTipoDocumentoId(Long tipoDocumentoId) {
         this.tipoDocumentoId = tipoDocumentoId;
     }
     

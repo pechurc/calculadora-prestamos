@@ -56,7 +56,7 @@ public class PrestamoCuotaServiceTest {
     @Test
     public void givenPrestamoCuotaDto_whenUpdate_thenPrestamoCuotaEntityUpdated() {
 
-        PrestamoCuotaPk pk = new PrestamoCuotaPk(1, 1);
+        PrestamoCuotaPk pk = new PrestamoCuotaPk(1L, 1);
         when(prestamoCuotaRepository.findById(pk))
         .thenReturn(Optional.of(new PrestamoCuotaEntity(pk, null, 1, new BigDecimal("100"), 
                 new BigDecimal("100"), new BigDecimal("200"))));
@@ -74,7 +74,7 @@ public class PrestamoCuotaServiceTest {
     @Test
     public void givenPrestamoCuotaId_whenDelete_thenPrestamoCuotaDeleted() {
         
-        PrestamoCuotaPk pk = new PrestamoCuotaPk(1, 1);
+        PrestamoCuotaPk pk = new PrestamoCuotaPk(1L, 1);
         PrestamoCuotaEntity prestamoCuotaEntity = new PrestamoCuotaEntity(pk, null, 1, 
                 new BigDecimal("100"), new BigDecimal("100"), new BigDecimal("200"));
         when(prestamoCuotaRepository.findById(pk))
@@ -90,7 +90,7 @@ public class PrestamoCuotaServiceTest {
     @Test
     public void givenPrestamoCuotaId_whenDeleteNonExist_thenThrowException() {
 
-        PrestamoCuotaPk pk = new PrestamoCuotaPk(1, 1);
+        PrestamoCuotaPk pk = new PrestamoCuotaPk(1L, 1);
         Throwable throwable = catchThrowable(() -> prestamoCuotaService.delete(pk));
         
         assertThat(throwable)
@@ -106,7 +106,7 @@ public class PrestamoCuotaServiceTest {
     @Test
     public void givenPrestamoCuotaId_whenGet_thenPrestamoCuotaReturned() {
         
-        PrestamoCuotaPk pk = new PrestamoCuotaPk(1, 1);
+        PrestamoCuotaPk pk = new PrestamoCuotaPk(1L, 1);
         PrestamoCuotaEntity prestamoCuotaEntity = new PrestamoCuotaEntity(pk, null, 1, 
                 new BigDecimal("100"), new BigDecimal("100"), new BigDecimal("200"));
         when(prestamoCuotaRepository.findById(pk))

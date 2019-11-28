@@ -32,7 +32,7 @@ public class TipoDocumentoServiceTest {
     @Test
     public void givenTipoDocumentoDto_whenCreate_thenTipoDocumentoEntityCreated() {
         
-        when(tipoDocumentoRepository.getMax()).thenReturn(Optional.of(0));
+        when(tipoDocumentoRepository.getMax()).thenReturn(Optional.of(0L));
         
         TipoDocumentoDto tipoDocumentoDto = new TipoDocumentoDto("DNI", "DNI", true);
         
@@ -47,12 +47,12 @@ public class TipoDocumentoServiceTest {
     @Test
     public void givenTipoDocumentoDto_whenUpdate_thenTipoDocumentoEntityUpdated() {
         
-        when(tipoDocumentoRepository.findById(1))
-        .thenReturn(Optional.of(new TipoDocumentoEntity(1, "DNI", "DNI", false)));
+        when(tipoDocumentoRepository.findById(1L))
+        .thenReturn(Optional.of(new TipoDocumentoEntity(1L, "DNI", "DNI", false)));
         
         TipoDocumentoDto tipoDocumentoDto = new TipoDocumentoDto("DocNacId", "DNI2", true);
         
-        TipoDocumentoEntity tipoDocumentoEntity= tipoDocumentoService.update(1, tipoDocumentoDto);
+        TipoDocumentoEntity tipoDocumentoEntity= tipoDocumentoService.update(1L, tipoDocumentoDto);
         
         assertThat(tipoDocumentoEntity.getId()).isEqualTo(1);
         assertThat(tipoDocumentoEntity.getAbreviatura()).isEqualTo("DNI2");
@@ -66,7 +66,7 @@ public class TipoDocumentoServiceTest {
         TipoDocumentoDto tipoDocumentoDto = new TipoDocumentoDto("DNI", "DNI", true);
         
         Throwable throwable = catchThrowable(
-                () -> tipoDocumentoService.update(1, tipoDocumentoDto));
+                () -> tipoDocumentoService.update(1L, tipoDocumentoDto));
         
         assertThat(throwable)
         .isInstanceOf(NotFoundServiceException.class)
@@ -76,14 +76,14 @@ public class TipoDocumentoServiceTest {
     @Test
     public void givenId_whenDelete_thenDeleted() {
         
-        TipoDocumentoEntity tipoDocumentoEntity = new TipoDocumentoEntity(1, "DNI", "DNI", false);
+        TipoDocumentoEntity tipoDocumentoEntity = new TipoDocumentoEntity(1L, "DNI", "DNI", false);
         
-        when(tipoDocumentoRepository.findById(1))
-        .thenReturn(Optional.of(new TipoDocumentoEntity(1, "DNI", "DNI", false)));
+        when(tipoDocumentoRepository.findById(1L))
+        .thenReturn(Optional.of(new TipoDocumentoEntity(1L, "DNI", "DNI", false)));
 
-        tipoDocumentoService.delete(1);
+        tipoDocumentoService.delete(1L);
         
-        Mockito.verify(tipoDocumentoRepository).findById(Mockito.eq(1));
+        Mockito.verify(tipoDocumentoRepository).findById(Mockito.eq(1L));
         Mockito.verify(tipoDocumentoRepository).delete(Mockito.eq(tipoDocumentoEntity));
     }
     
@@ -91,13 +91,13 @@ public class TipoDocumentoServiceTest {
     public void givenId_whenDeleteNonExists_thenThrowNotFoundServiceException() {
                 
         Throwable throwable = catchThrowable(
-                () -> tipoDocumentoService.delete(1));
+                () -> tipoDocumentoService.delete(1L));
                 
         assertThat(throwable)
         .isInstanceOf(NotFoundServiceException.class)
         .hasMessageContaining("Tipo documento con ID=1 no encontrada");
         
-        Mockito.verify(tipoDocumentoRepository).findById(Mockito.eq(1));
+        Mockito.verify(tipoDocumentoRepository).findById(Mockito.eq(1L));
         Mockito.verify(tipoDocumentoRepository, never())
         .delete(Mockito.any(TipoDocumentoEntity.class));
     }
@@ -105,10 +105,10 @@ public class TipoDocumentoServiceTest {
     @Test
     public void givenTipoDocumentoId_whenExists_thenReturnLocalidadEntity() {
         
-        when(tipoDocumentoRepository.findById(1))
-        .thenReturn(Optional.of(new TipoDocumentoEntity(1, "DNI", "DNI", false)));
+        when(tipoDocumentoRepository.findById(1L))
+        .thenReturn(Optional.of(new TipoDocumentoEntity(1L, "DNI", "DNI", false)));
         
-        TipoDocumentoEntity tipoDocumentoEntity = tipoDocumentoService.getById(1);
+        TipoDocumentoEntity tipoDocumentoEntity = tipoDocumentoService.getById(1L);
         
         assertThat(tipoDocumentoEntity.getId()).isEqualTo(1L);
         assertThat(tipoDocumentoEntity.getNombre()).isEqualTo("DNI");

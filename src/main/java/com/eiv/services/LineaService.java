@@ -23,7 +23,7 @@ public class LineaService {
     private UsuarioService usuarioService;
     
     @Transactional(readOnly = true)
-    public LineaEntity getById(Integer id) {
+    public LineaEntity getById(Long id) {
         
         return lineaRepository
                 .findById(id)
@@ -38,7 +38,7 @@ public class LineaService {
                 linea.getTipoDocumentoId());
         UsuarioEntity usuario = usuarioService.getById(personaPk);
         
-        Integer id = lineaRepository.getMax().orElse(0) + 1;
+        Long id = lineaRepository.getMax().orElse(0L) + 1L;
         
         lineaEntity.setUsuario(usuario);
         lineaEntity.setCapitalMax(linea.getCapitalMax());
@@ -58,7 +58,7 @@ public class LineaService {
     }
     
     @Transactional
-    public LineaEntity update(Integer id, ILinea linea) {
+    public LineaEntity update(Long id, ILinea linea) {
         
         LineaEntity lineaEntity = lineaRepository
                 .findById(id)
@@ -80,7 +80,7 @@ public class LineaService {
     }
     
     @Transactional
-    public void delete(Integer id) {
+    public void delete(Long id) {
         
         LineaEntity lineaEntity = lineaRepository
                 .findById(id)
@@ -89,7 +89,7 @@ public class LineaService {
         lineaRepository.delete(lineaEntity);
     }
     
-    private Supplier<? extends RuntimeException> exceptionSupplier(Integer id) {
+    private Supplier<? extends RuntimeException> exceptionSupplier(Long id) {
         
         return ExceptionUtils.notFoundExceptionSupplier("Linea con ID=%s no encontrada", id);
     }   

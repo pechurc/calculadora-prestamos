@@ -11,23 +11,23 @@ public class PrestamoCuotaPk implements Serializable {
     private static final long serialVersionUID = 8878257701407645703L;
     
     @Column(name = "prestamo_id", nullable = false)
-    private Integer prestamoId;
+    private Long prestamoId;
     
     @Column(name = "nro_cuota", nullable = false)
     private Integer nroCuota;
     
     public PrestamoCuotaPk() { }
     
-    public PrestamoCuotaPk(Integer prestamoId, Integer nroCuota) { 
+    public PrestamoCuotaPk(Long prestamoId, Integer nroCuota) { 
         this.prestamoId = prestamoId;
         this.nroCuota = nroCuota;
     }
 
-    public Integer getPrestamoId() {
+    public Long getPrestamoId() {
         return prestamoId;
     }
 
-    public void setPrestamoId(Integer prestamoId) {
+    public void setPrestamoId(Long prestamoId) {
         this.prestamoId = prestamoId;
     }
 

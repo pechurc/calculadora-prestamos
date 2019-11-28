@@ -41,7 +41,7 @@ public class LineaServiceTest {
     @Test
     public void givenLineaDto_whenCreate_thenLineaEntityCreated() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);      
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);      
         PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, null, 
                 "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
                 "2000SC", GeneroEnum.MASCULINO, null);
@@ -49,9 +49,9 @@ public class LineaServiceTest {
         
         when(usuarioService.getById(personaPk))
         .thenReturn(usuarioEntity);
-        when(lineaRepository.getMax()).thenReturn(Optional.of(0));
+        when(lineaRepository.getMax()).thenReturn(Optional.of(0L));
         
-        LineaEntity lineaEntity = lineaService.save(new LineaDto(12345678L, 1, "TEST!", 
+        LineaEntity lineaEntity = lineaService.save(new LineaDto(12345678L, 1L, "TEST!", 
                 BigDecimal.valueOf(1.1f), BigDecimal.valueOf(1.2f), 1, 12, 
                 BigDecimal.valueOf(100d), BigDecimal.valueOf(1000d), LocalDate.of(2019, 11, 27), 
                 SistemaAmortizacionEnum.AMERICANO));
@@ -74,18 +74,18 @@ public class LineaServiceTest {
     @Test
     public void givenLineaDto_whenUpdate_thenLineaEntityUpdated() {
         
-        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1);      
+        PersonaPkEntity personaPk = new PersonaPkEntity(12345678L, 1L);      
         PersonaEntity personaEntity = new PersonaEntity(personaPk, 12345678L, null, 
                 "Juan Tester", LocalDate.of(1990, 4, 4), "test@tester.com", true, null, 
                 "2000SC", GeneroEnum.MASCULINO, null);
         UsuarioEntity usuarioEntity = new UsuarioEntity(personaEntity, "juantes", "asdqwe");
 
-        when(lineaRepository.findById(1)).thenReturn(Optional.of(new LineaEntity(1, usuarioEntity,
+        when(lineaRepository.findById(1L)).thenReturn(Optional.of(new LineaEntity(1L, usuarioEntity,
                 "TEST!",  BigDecimal.valueOf(1.1f), BigDecimal.valueOf(1.2f), 1, 12, 
                 BigDecimal.valueOf(100d), BigDecimal.valueOf(1000d), LocalDate.of(2019, 11, 27), 
                 SistemaAmortizacionEnum.AMERICANO)));
         
-        LineaEntity lineaEntity = lineaService.update(1, new LineaDto(12345678L, 1, "TEST!", 
+        LineaEntity lineaEntity = lineaService.update(1L, new LineaDto(12345678L, 1L, "TEST!", 
                 BigDecimal.valueOf(1.3f), BigDecimal.valueOf(1.4f), 1, 12, 
                 BigDecimal.valueOf(101d), BigDecimal.valueOf(1001d), LocalDate.of(2019, 11, 27), 
                 SistemaAmortizacionEnum.FRANCES));
@@ -107,12 +107,12 @@ public class LineaServiceTest {
     @Test
     public void givenLineaDto_whenUpdateNonExists_thenThrowNotFoundServiceException() {
         
-        LineaDto lineaDto = new LineaDto(12345678L, 1, "TEST!", 
+        LineaDto lineaDto = new LineaDto(12345678L, 1L, "TEST!", 
                 BigDecimal.valueOf(1.3f), BigDecimal.valueOf(1.4f), 1, 12, 
                 BigDecimal.valueOf(101d), BigDecimal.valueOf(1001d), LocalDate.of(2019, 11, 27), 
                 SistemaAmortizacionEnum.FRANCES);
 
-        Throwable throwable = catchThrowable(() -> lineaService.update(1, lineaDto));
+        Throwable throwable = catchThrowable(() -> lineaService.update(1L, lineaDto));
         
         assertThat(throwable)
         .isInstanceOf(NotFoundServiceException.class)
@@ -122,41 +122,41 @@ public class LineaServiceTest {
     @Test
     public void givenId_thenDelete() {
         
-        LineaEntity lineaEntity = new LineaEntity(1, null, 
+        LineaEntity lineaEntity = new LineaEntity(1L, null, 
                 "TEST!",  BigDecimal.valueOf(1.1f), BigDecimal.valueOf(1.2f), 1, 12, 
                 BigDecimal.valueOf(100d), BigDecimal.valueOf(1000d), LocalDate.of(2019, 11, 27), 
                 SistemaAmortizacionEnum.AMERICANO);
         
-        when(lineaRepository.findById(1)).thenReturn(Optional.of(lineaEntity));        
+        when(lineaRepository.findById(1L)).thenReturn(Optional.of(lineaEntity));        
         
-        lineaService.delete(1);
+        lineaService.delete(1L);
         
-        Mockito.verify(lineaRepository).findById(Mockito.eq(1));
+        Mockito.verify(lineaRepository).findById(Mockito.eq(1L));
         Mockito.verify(lineaRepository).delete(Mockito.eq(lineaEntity));        
     }
     
     @Test
     public void givenLineaId_whenDeleteNonExist_thenThrowException() {
 
-        Throwable throwable = catchThrowable(() -> lineaService.delete(1));
+        Throwable throwable = catchThrowable(() -> lineaService.delete(1L));
         
         assertThat(throwable)
                 .isInstanceOf(NotFoundServiceException.class)
                 .hasMessageContaining("Linea con ID=1 no encontrada");
 
-        Mockito.verify(lineaRepository).findById(Mockito.eq(1));
+        Mockito.verify(lineaRepository).findById(Mockito.eq(1L));
         Mockito.verify(lineaRepository, never()).delete(Mockito.any(LineaEntity.class));
     }
     
     @Test
     public void givenLineaId_whenExists_thenReturnLocalidadEntity() {
         
-        when(lineaRepository.findById(1)).thenReturn(Optional.of(new LineaEntity(1, null, 
+        when(lineaRepository.findById(1L)).thenReturn(Optional.of(new LineaEntity(1L, null, 
                 "TEST!",  BigDecimal.valueOf(1.1f), BigDecimal.valueOf(1.2f), 1, 12, 
                 BigDecimal.valueOf(100d), BigDecimal.valueOf(1000d), LocalDate.of(2019, 11, 27), 
                 SistemaAmortizacionEnum.AMERICANO))); 
         
-        LineaEntity lineaEntity = lineaService.getById(1);
+        LineaEntity lineaEntity = lineaService.getById(1L);
         
         assertThat(lineaEntity.getId()).isEqualTo(1L);
         assertThat(lineaEntity.getNombre()).isEqualTo("TEST!");

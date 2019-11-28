@@ -8,14 +8,14 @@ import com.eiv.interfaces.IPrestamo;
 public class PrestamoDto implements IPrestamo {
 
     private Long numeroDocumento;
-    private Integer tipoDocumentoId;
+    private Long tipoDocumentoId;
     private LocalDate fechaAlta;
     private BigDecimal tea;
     private BigDecimal teaModulo;
     private BigDecimal capitalPrestado;
     private BigDecimal totalIntereses;
     
-    public PrestamoDto(Long numeroDocumento, Integer tipoDocumentoId, LocalDate fechaAlta, 
+    public PrestamoDto(Long numeroDocumento, Long tipoDocumentoId, LocalDate fechaAlta, 
             BigDecimal tea, BigDecimal teaModulo, BigDecimal capitalPrestado,
             BigDecimal totalIntereses) {
         super();
@@ -34,7 +34,7 @@ public class PrestamoDto implements IPrestamo {
     }
 
     @Override
-    public Integer getTipoDocumentoId() {
+    public Long getTipoDocumentoId() {
         return tipoDocumentoId;
     }
 

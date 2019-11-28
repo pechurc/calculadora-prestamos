@@ -19,7 +19,7 @@ public class LineaEntity {
 
     @Id
     @Column(name = "linea_id")
-    private Integer id;
+    private Long id;
     
     @Column(name = "nombre", length = 200)
     private String nombre;
@@ -59,7 +59,7 @@ public class LineaEntity {
 
     public LineaEntity() { }
     
-    public LineaEntity(Integer id, UsuarioEntity usuario, String nombre, 
+    public LineaEntity(Long id, UsuarioEntity usuario, String nombre, 
             BigDecimal tasaMin, BigDecimal tasaMax, Integer cuotasMin, Integer cuotasMax, 
             BigDecimal capitalMin, BigDecimal capitalMax, LocalDate fechaAlta, 
             SistemaAmortizacionEnum sistemaAmortizacion) {
@@ -77,11 +77,11 @@ public class LineaEntity {
         this.sistemaAmortizacion = sistemaAmortizacion;
     }
     
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

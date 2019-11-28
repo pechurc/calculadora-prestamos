@@ -13,7 +13,7 @@ public class ProvinciaEntity {
 
     @Id
     @Column(name = "id_provincia", nullable = false)
-    private Integer id;
+    private Long id;
     
     @Column(name = "nombre", nullable = false, unique = true, length = 400)
     private String nombre;
@@ -23,18 +23,18 @@ public class ProvinciaEntity {
        
     public ProvinciaEntity() { }
     
-    public ProvinciaEntity(Integer id, String nombre, RegionEnum region) {
+    public ProvinciaEntity(Long id, String nombre, RegionEnum region) {
         
         this.id = id;
         this.nombre = nombre;
         this.region = region;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
