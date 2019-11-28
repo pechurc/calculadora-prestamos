@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="axel.garcia (generated)" id="1574969856427-1">
+        <createTable tableName="lineas">
+            <column name="linea_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sistema_amortizacion" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tasa_min" type="DECIMAL(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tasa_max" type="DECIMAL(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cuotas_min" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cuotas_max" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capital_min" type="DECIMAL(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capital_max" type="DECIMAL(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_alta" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="usuario_tipo_documento_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="usuario_numero_documento" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-2">
+        <createTable tableName="localidades">
+            <column autoIncrement="true" name="id_localidad" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nombre" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_provincia" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="codigo_postal" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-3">
+        <createTable tableName="personas">
+            <column name="id_tipodocumento" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero_documento" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre_apellido" type="VARCHAR(400)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_nacimiento" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genero" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="es_argentino" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="correo_electronico" type="VARCHAR(300)"/>
+            <column name="foto_cara" type="BLOB"/>
+            <column name="id_localidad" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="codigo_postal" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-4">
+        <createTable tableName="prestamos">
+            <column name="prestamo_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capital_prestado" type="DECIMAL(19, 2)"/>
+            <column name="fecha_alta" type="date"/>
+            <column name="tea" type="DECIMAL(19, 2)"/>
+            <column name="tea_modulo" type="DECIMAL(19, 2)"/>
+            <column name="total_intereses" type="DECIMAL(19, 2)"/>
+            <column name="usuario_numero_documento" type="BIGINT"/>
+            <column name="usuario_tipo_documento_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-5">
+        <createTable tableName="prestamos_cuotas">
+            <column name="nro_cuota" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="importe_capital" type="DECIMAL(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="importe_intereses" type="DECIMAL(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="importe_total" type="DECIMAL(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="prestamo_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-6">
+        <createTable tableName="provincias">
+            <column autoIncrement="true" name="id_provincia" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nombre" type="VARCHAR(400)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="region" type="CHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-7">
+        <createTable tableName="tipos_documentos">
+            <column autoIncrement="true" name="id_tipodocumento" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nombre" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="abreviatura" type="VARCHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="validar_como_cuit" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-8">
+        <createTable tableName="usuarios">
+            <column name="id_tipodocumento" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero_documento" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre_usuario" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hashed_pwd" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-9">
+        <addPrimaryKey columnNames="linea_id" constraintName="PRIMARY" tableName="lineas"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-10">
+        <addPrimaryKey columnNames="id_tipodocumento, numero_documento" constraintName="PRIMARY" tableName="personas"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-11">
+        <addPrimaryKey columnNames="prestamo_id" constraintName="PRIMARY" tableName="prestamos"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-12">
+        <addPrimaryKey columnNames="nro_cuota, prestamo_id" constraintName="PRIMARY" tableName="prestamos_cuotas"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-13">
+        <addPrimaryKey columnNames="id_tipodocumento, numero_documento" constraintName="PRIMARY" tableName="usuarios"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-14">
+        <addUniqueConstraint columnNames="abreviatura" constraintName="UK_6vovq0mrq287touvd8y8j36xb" tableName="tipos_documentos"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-15">
+        <addUniqueConstraint columnNames="nombre_apellido" constraintName="UK_j9gd7x5woiskn2o5q95lgxl97" tableName="personas"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-16">
+        <addUniqueConstraint columnNames="nombre" constraintName="UK_otj7kmq4jxw8xre8265k3tvxj" tableName="provincias"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-17">
+        <addUniqueConstraint columnNames="nombre" constraintName="UK_pfokmuvqnms483ruwtmddiwbw" tableName="tipos_documentos"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-18">
+        <addUniqueConstraint columnNames="nombre, id_provincia" constraintName="localidades_nombre_id_provincia_UNIQUE" tableName="localidades"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-19">
+        <addUniqueConstraint columnNames="nombre" constraintName="nombre_UNIQUE" tableName="lineas"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-20">
+        <addUniqueConstraint columnNames="nombre" constraintName="nombre_UNIQUE" tableName="provincias"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-21">
+        <addUniqueConstraint columnNames="nombre" constraintName="nombre_UNIQUE" tableName="tipos_documentos"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-22">
+        <addUniqueConstraint columnNames="nombre_apellido" constraintName="nombre_apellido_UNIQUE" tableName="personas"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-23">
+        <addUniqueConstraint columnNames="nombre_usuario" constraintName="nombre_usuario_UNIQUE" tableName="usuarios"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-24">
+        <createIndex indexName="FKbv9u2aqx5lw9x6srnr5muy4q1" tableName="prestamos_cuotas">
+            <column name="prestamo_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-25">
+        <createIndex indexName="fk_lineas_usuarios_idx" tableName="lineas">
+            <column name="usuario_tipo_documento_id"/>
+            <column name="usuario_numero_documento"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-26">
+        <createIndex indexName="fk_localidades_id_localidad_idx" tableName="personas">
+            <column name="id_localidad"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-27">
+        <createIndex indexName="fk_provincias_localidades_idx" tableName="localidades">
+            <column name="id_provincia"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-28">
+        <addForeignKeyConstraint baseColumnNames="id_localidad" baseTableName="personas" constraintName="FK6lxqrkle29rq1ch1xkugqsqol" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_localidad" referencedTableName="localidades"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-29">
+        <addForeignKeyConstraint baseColumnNames="id_provincia" baseTableName="localidades" constraintName="FK9hk6pt1dlxrkxixygbw0v0mrq" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_provincia" referencedTableName="provincias"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-30">
+        <addForeignKeyConstraint baseColumnNames="id_tipodocumento" baseTableName="personas" constraintName="FKaujronch9jglsxta7kc0kj8pm" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_tipodocumento" referencedTableName="tipos_documentos"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-31">
+        <addForeignKeyConstraint baseColumnNames="prestamo_id" baseTableName="prestamos_cuotas" constraintName="FKbv9u2aqx5lw9x6srnr5muy4q1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="prestamo_id" referencedTableName="prestamos"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-32">
+        <addForeignKeyConstraint baseColumnNames="usuario_tipo_documento_id,usuario_numero_documento" baseTableName="lineas" constraintName="fk_lineas_usuarios" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_tipodocumento,numero_documento" referencedTableName="usuarios"/>
+    </changeSet>
+    <changeSet author="axel.garcia (generated)" id="1574969856427-33">
+        <addForeignKeyConstraint baseColumnNames="id_tipodocumento,numero_documento" baseTableName="usuarios" constraintName="fk_usuarios_personas" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_tipodocumento,numero_documento" referencedTableName="personas"/>
+    </changeSet>
+</databaseChangeLog>
