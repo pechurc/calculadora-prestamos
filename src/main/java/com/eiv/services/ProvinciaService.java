@@ -1,5 +1,7 @@
 package com.eiv.services;
 
+import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eiv.entities.ProvinciaEntity;
+import com.eiv.entities.QProvinciaEntity;
 import com.eiv.interfaces.IProvincia;
 import com.eiv.repositories.ProvinciaRepository;
 import com.eiv.utils.ExceptionUtils;
+import com.querydsl.core.types.dsl.BooleanExpression;
 
 @Service
 public class ProvinciaService {
@@ -17,6 +21,19 @@ public class ProvinciaService {
     @Autowired
     private ProvinciaRepository provinciaRepository;
 
+    @Transactional(readOnly = true)
+    public List<ProvinciaEntity> buscar(Function<QProvinciaEntity, BooleanExpression> provinciaQuery) {
+    	QProvinciaEntity q = QProvinciaEntity.provinciaEntity;
+    	BooleanExpression exp = provinciaQuery.apply(q);
+    	
+    	return (List<ProvinciaEntity>) provinciaRepository.findAll(exp);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<ProvinciaEntity> getAll() {
+    	return provinciaRepository.findAll();
+    }
+    
     @Transactional(readOnly = true)
     public ProvinciaEntity getById(Long id) {
         return provinciaRepository.findById(id)
