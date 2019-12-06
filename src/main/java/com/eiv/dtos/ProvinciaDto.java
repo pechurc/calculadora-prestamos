@@ -13,6 +13,7 @@ public class ProvinciaDto implements IProvincia {
 	@Length(min = 1, max = 200, message = "La longitud del nombre debe estar entre 1 y 200 caracteres")
     private String nombre;
     private RegionEnum region;
+    private Long id;
 
 	public ProvinciaDto() {
 
@@ -36,6 +37,10 @@ public class ProvinciaDto implements IProvincia {
 	public void setRegion(RegionEnum region) {
 		this.region = region;
 	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	@Override
     public String getNombre() {
@@ -48,8 +53,12 @@ public class ProvinciaDto implements IProvincia {
     }
     
 	@Override
+	public Long getId() {
+		return id;
+	}
+    
+	@Override
 	public String toString() {
 		return "ProvinciaDto [nombre=" + nombre + ", region=" + region + "]";
 	}
-
 }
