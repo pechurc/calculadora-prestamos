@@ -11,80 +11,104 @@
 
 <div class="row">
 	<div class="col">
-		<kendo:grid name="grid" groupable="false" sortable="true"
-			style="height:550px;">
-			<kendo:grid-editable mode="popup" />
+		<kendo:grid id="grid" name="grid" style="height:550px;">
 			<kendo:grid-toolbar>
-				<kendo:grid-toolbarItem name="create" text="Nueva provincia"/>
+				<kendo:grid-toolbarItem name="create" text="Nueva provincia" />
 			</kendo:grid-toolbar>
-			<kendo:grid-pageable refresh="true" pageSizes="true" buttonCount="5">
-			</kendo:grid-pageable>
-			<kendo:grid-columns>
-				<kendo:grid-column title="Nombre" field="nombre" />
-				<kendo:grid-column title="Region" field="region" editor="regionDropDownEditor" />
-				<kendo:grid-column title="&nbsp;">
-					<kendo:grid-column-command>
-						<kendo:grid-column-commandItem name="edit" />
-						<kendo:grid-column-commandItem name="destroy" />
-					</kendo:grid-column-command>
-				</kendo:grid-column>
-			</kendo:grid-columns>
-			<kendo:dataSource pageSize="10">
-				<kendo:dataSource-transport>
-					<kendo:dataSource-transport-create url="${apiUrl}" dataType="json"
-						type="POST" contentType="application/json" />
-					<kendo:dataSource-transport-read url="${apiUrl}" dataType="json"
-						type="GET" contentType="application/json" />
-					<kendo:dataSource-transport-update dataType="json" type="PATCH"
-						contentType="application/json">
-						<kendo:dataSource-transport-update-url>
-							<script>
-					            function(e) {
-					            	return "${apiUrl}/" + e.id;
-					            }
-					        </script>
-						</kendo:dataSource-transport-update-url>
-					</kendo:dataSource-transport-update>
-					<kendo:dataSource-transport-destroy dataType="json" type="DELETE"
-						contentType="application/json">
-						<kendo:dataSource-transport-destroy-url>
-							<script>
-					            function(e) {
-					            	return "${apiUrl}/" + e.id;
-					            }
-					        </script>
-						</kendo:dataSource-transport-destroy-url>
-					</kendo:dataSource-transport-destroy>
-					<kendo:dataSource-transport-parameterMap>
-						<script>
-							function parameterMap(data, type) {
-								if (type === 'update' || type === 'create') {
-									return kendo.stringify(data);
-								}
-							}
-						</script>
-					</kendo:dataSource-transport-parameterMap>
-				</kendo:dataSource-transport>
-				<kendo:dataSource-schema>
-					<kendo:dataSource-schema-model id="id">
-						<kendo:dataSource-schema-model-fields>
-							<kendo:dataSource-schema-model-field name="nombre" type="string" nullable="false"/>
-							<kendo:dataSource-schema-model-field name="region" type="string" nullable="false"/>
-						</kendo:dataSource-schema-model-fields>
-					</kendo:dataSource-schema-model>
-				</kendo:dataSource-schema>
-			</kendo:dataSource>
 		</kendo:grid>
 	</div>
 </div>
-<script>
-	function regionDropDownEditor(container, options) {
-		$('<input data-bind="value:' + options.field + '"/>')
-        .appendTo(container)
-        .kendoDropDownList({
-            autoBind: false,
-            dataSource: ${regionEnum}
-        });
-	}
+
+
+
+<script id="popup_editor" type="text/x-kendo-template">
+    <div class="form-group">
+    	<label for="nombre">Nombre</label>
+    	<input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" data-bind="value:nombre" required/>
+    	<small id="nombreHelp" class="form-text text-muted">Nombre de la provincia</small>
+
+  	</div>
+	<div class="form-group">
+			<input id="region" style="width: 100%;" data-bind="value:region" required/>
+	</div>
 </script>
+
+<script>
+$(function () {
+	var dataSource = new kendo.data.DataSource({	
+		  		pageSize: 10,			
+			  transport: {
+					    read: {
+					        	url: "${apiUrl}",
+					          	dataType: "json", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+					        },
+					   	destroy: {
+					        	url: function(options) {						        	
+					                return "${apiUrl}/" + options.id;
+					            },
+					            type: "DELETE",
+					          	dataType: "json", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+					        },
+					  	update: {
+					        	url: function(options) {						        	
+					                return "${apiUrl}/" + options.id;
+					            },
+					          	dataType: "json",
+								type: "PATCH",
+								contentType: "application/json"
+					        },
+					   	create: {
+					        	url: "${apiUrl}/",
+					          	dataType: "json",
+								type: "POST",
+								contentType: "application/json"
+					        },
+					    parameterMap: function(data, type) {
+								if (type === 'update' || type === 'create') {
+									return kendo.stringify(data);
+								}
+							}		
+			  },			  
+			  schema: {
+					model: {
+						id: "id",
+			          	fields: {
+				            "id": { type: "number" },
+				            "nombre": { type: "string", validation: { required: true, min: 1 }},
+				            "region": { type: "string", validation: { required: true, min: 1 }}
+			          		}
+			        	}
+			      	}				
+		});
+	
+	function initDropDownLists() {
+		
+		var region = $("#region").kendoDropDownList({
+            optionLabel: "Seleccionar region...",
+            dataSource: ${regionEnum},
+        }).data("kendoDropDownList");
+	}
+	
+	$("#grid").kendoGrid({
+	  columns: [
+	    { field: "id" },
+	    { field: "nombre" },
+	    { field: "region" },
+	    { command: ["edit", "delete"] }
+	  ],
+	  dataSource: dataSource,
+	  editable: {mode: "popup", template: $("#popup_editor").html()},
+	  edit: function (e) {
+          initDropDownLists();
+      },
+	  toolbar:["create"],
+	  pageable: {
+		    pageSize: 10,
+		    buttonCount: 1,
+		    refresh: true
+		  },
+	});
+});
+</script>
+
 <eiv:footer />

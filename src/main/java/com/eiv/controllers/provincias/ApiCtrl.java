@@ -41,7 +41,7 @@ public class ApiCtrl {
 			throws BindException {
 		
 		if (result.hasErrors()) {
-			throw new BindException();
+			throw new BindException(result.getObjectName());
 		}
 		
 		ProvinciaEntity provinciaEntity = provinciaService.save(provincia);
@@ -78,4 +78,6 @@ public class ApiCtrl {
 		
 		return ResponseEntity.noContent().build();
 	}
+	
+  
 }

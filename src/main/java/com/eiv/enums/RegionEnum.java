@@ -1,5 +1,7 @@
 package com.eiv.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public enum RegionEnum implements GenericEnum<String> {
     NOROESTE("NOA"),
     NORDESTE("NOE"),
@@ -33,7 +35,7 @@ public enum RegionEnum implements GenericEnum<String> {
             return PATAGONIA;
         } else {
             throw new IllegalArgumentException(
-                    String.format("No se reconoce %s como una region", region));
+                    String.format("No se reconoce '%s' como una region", region));
         }
     }
 
@@ -41,4 +43,16 @@ public enum RegionEnum implements GenericEnum<String> {
     public String getId() {
         return this.region;
     }
+    
+    @JsonCreator
+    public static RegionEnum forValue(String value) {
+    	
+    	try {
+    		return valueOf(value.toUpperCase());
+    	} catch (IllegalArgumentException e) {
+    		throw new IllegalArgumentException(
+                    String.format("No se reconoce '%s' como una region", value));
+    	}        
+    }
+    
 }
