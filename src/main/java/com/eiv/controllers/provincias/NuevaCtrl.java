@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eiv.dtos.IModuloNavItem;
-import com.eiv.dtos.IModuloNavLink;
 import com.eiv.dtos.ModuloNavItem;
 import com.eiv.dtos.ModuloNavLink;
 import com.eiv.dtos.ProvinciaDto;
 import com.eiv.entities.ProvinciaEntity;
 import com.eiv.enums.RegionEnum;
 import com.eiv.exceptions.NotFoundServiceException;
+import com.eiv.interfaces.IModuloNavItem;
+import com.eiv.interfaces.IModuloNavLink;
 import com.eiv.services.ProvinciaService;
 
 @Controller("NuevaProvincias")

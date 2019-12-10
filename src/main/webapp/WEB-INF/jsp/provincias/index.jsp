@@ -38,31 +38,61 @@ $(function () {
 	var dataSource = new kendo.data.DataSource({	
 		  		pageSize: 10,			
 			  transport: {
-					    read: {
-					        	url: "${apiUrl}",
-					          	dataType: "json", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-					        },
-					   	destroy: {
-					        	url: function(options) {						        	
-					                return "${apiUrl}/" + options.id;
+					    read: function(options) {
+					        $.ajax({
+					          url: "${apiUrl}",
+					          dataType: "json",
+					          success: function(result) {
+					              options.success(result);
 					            },
-					            type: "DELETE",
-					          	dataType: "json", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-					        },
-					  	update: {
-					        	url: function(options) {						        	
-					                return "${apiUrl}/" + options.id;
-					            },
-					          	dataType: "json",
-								type: "PATCH",
-								contentType: "application/json"
-					        },
-					   	create: {
-					        	url: "${apiUrl}/",
-					          	dataType: "json",
-								type: "POST",
-								contentType: "application/json"
-					        },
+					          error: function(result) {
+					              options.error(result);
+					            }
+					        });
+					      },
+					   	destroy:function(options) {
+					   		$.ajax({
+						          url: "${apiUrl}/" + options.data.id,
+						          dataType: "json",
+						          method: "DELETE",
+						          success: function(result) {
+						              options.success(result);
+						            },
+						          error: function(result) {
+						              options.error(result);
+						            }
+						        });
+					      },
+					  	update: function(options) {
+					  		$.ajax({
+						          url: "${apiUrl}/" + options.data.id,
+						          dataType: "json",
+						          method: "PATCH",
+						          data: kendo.stringify(options.data),
+						          contentType: "application/json",
+						          success: function(result) {
+						              options.success(result);
+						            },
+						          error: function(result) {
+						              options.error(result);
+						            }
+						        });
+					      },
+					   	create: function(options) {
+					   		$.ajax({
+						          url: "${apiUrl}",
+						          dataType: "json",
+						          method: "POST",
+						          data: kendo.stringify(options.data),
+						          contentType: "application/json",
+						          success: function(result) {
+						              options.success(result);
+						            },
+						          error: function(result) {
+						              options.error(result);
+						            }
+						        });
+					      },
 					    parameterMap: function(data, type) {
 								if (type === 'update' || type === 'create') {
 									return kendo.stringify(data);

@@ -1,4 +1,4 @@
-package com.eiv.dtos;
+package com.eiv.interfaces;
 
 public interface IModuloNavLink {
     

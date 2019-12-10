@@ -2,6 +2,8 @@ package com.eiv.dtos;
 
 import java.io.Serializable;
 
+import com.eiv.interfaces.IModuloNavLink;
+
 public class ModuloNavLink implements IModuloNavLink, Serializable {
 
     private static final long serialVersionUID = 990337935640504410L;

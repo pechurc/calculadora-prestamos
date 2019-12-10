@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.eiv.dtos.IModuloNavItem;
-import com.eiv.dtos.IModuloNavLink;
 import com.eiv.dtos.ModuloNavItem;
 import com.eiv.dtos.ModuloNavLink;
 import com.eiv.enums.RegionEnum;
+import com.eiv.interfaces.IModuloNavItem;
+import com.eiv.interfaces.IModuloNavLink;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
