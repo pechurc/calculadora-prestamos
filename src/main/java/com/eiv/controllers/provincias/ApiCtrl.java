@@ -18,10 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.eiv.criterias.PaginationCriteria;
+import com.eiv.criterias.ProvinciaCriteria;
+import com.eiv.criterias.SearchCriteria;
+import com.eiv.criterias.SortingCriteria;
 import com.eiv.dtos.ProvinciaDto;
 import com.eiv.entities.ProvinciaEntity;
+import com.eiv.entities.QProvinciaEntity;
 import com.eiv.exceptions.NotFoundServiceException;
 import com.eiv.services.ProvinciaService;
+import com.querydsl.core.types.OrderSpecifier;
 
 @Controller("ProvinciasAPI")
 @RequestMapping(value = "/api/provincias")
@@ -30,10 +36,14 @@ public class ApiCtrl {
 	@Autowired
 	private ProvinciaService provinciaService;
 	
+	
 	@GetMapping
-	public @ResponseBody List<ProvinciaEntity> getProvincias() {
+	public @ResponseBody List<ProvinciaEntity> buscar(@Valid ProvinciaCriteria provinciaCriteria, 
+			@Valid PaginationCriteria pagination, @Valid SortingCriteria sorting, @Valid SearchCriteria search) {
 
-		return provinciaService.getAll();
+		List<OrderSpecifier<?>> orders = sorting.getOrderSpecifiers(QProvinciaEntity.provinciaEntity);
+
+		return provinciaService.getAll(orders);
 	}
 	
 	@PostMapping

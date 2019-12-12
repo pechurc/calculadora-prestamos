@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,13 +16,18 @@ import com.eiv.entities.QProvinciaEntity;
 import com.eiv.interfaces.IProvincia;
 import com.eiv.repositories.ProvinciaRepository;
 import com.eiv.utils.ExceptionUtils;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Service
 public class ProvinciaService {
 
     @Autowired
     private ProvinciaRepository provinciaRepository;
+    
+    @PersistenceContext
+    private EntityManager em;
 
     @Transactional(readOnly = true)
     public List<ProvinciaEntity> buscar(Function<QProvinciaEntity, BooleanExpression> provinciaQuery) {
@@ -30,8 +38,14 @@ public class ProvinciaService {
     }
     
     @Transactional(readOnly = true)
-    public List<ProvinciaEntity> getAll() {
-    	return provinciaRepository.findAll();
+    public List<ProvinciaEntity> getAll(List<OrderSpecifier<?>> orders) {
+    	QProvinciaEntity q = QProvinciaEntity.provinciaEntity;
+    	JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+    	
+    	return queryFactory
+    			.selectFrom(q)
+    			.orderBy(orders.toArray(new OrderSpecifier[orders.size()]))
+    			.fetch();
     }
     
     @Transactional(readOnly = true)
