@@ -24,10 +24,8 @@ import com.eiv.criterias.SearchCriteria;
 import com.eiv.criterias.SortingCriteria;
 import com.eiv.dtos.ProvinciaDto;
 import com.eiv.entities.ProvinciaEntity;
-import com.eiv.entities.QProvinciaEntity;
 import com.eiv.exceptions.NotFoundServiceException;
 import com.eiv.services.ProvinciaService;
-import com.querydsl.core.types.OrderSpecifier;
 
 @Controller("ProvinciasAPI")
 @RequestMapping(value = "/api/provincias")
@@ -41,9 +39,7 @@ public class ApiCtrl {
 	public @ResponseBody List<ProvinciaEntity> buscar(@Valid ProvinciaCriteria provinciaCriteria, 
 			@Valid PaginationCriteria pagination, @Valid SortingCriteria sorting, @Valid SearchCriteria search) {
 
-		List<OrderSpecifier<?>> orders = sorting.getOrderSpecifiers(QProvinciaEntity.provinciaEntity);
-
-		return provinciaService.getAll(orders);
+		return provinciaService.getAll(sorting);
 	}
 	
 	@PostMapping

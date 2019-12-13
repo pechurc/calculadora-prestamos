@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eiv.criterias.SortingCriteria;
 import com.eiv.entities.ProvinciaEntity;
 import com.eiv.entities.QProvinciaEntity;
 import com.eiv.interfaces.IProvincia;
@@ -38,13 +39,15 @@ public class ProvinciaService {
     }
     
     @Transactional(readOnly = true)
-    public List<ProvinciaEntity> getAll(List<OrderSpecifier<?>> orders) {
+    public List<ProvinciaEntity> getAll(SortingCriteria sortingCriteria) {
     	QProvinciaEntity q = QProvinciaEntity.provinciaEntity;
     	JPAQueryFactory queryFactory = new JPAQueryFactory(em);
     	
+    	List<OrderSpecifier<?>> order = sortingCriteria.getOrderSpecifiers(q);
+    	
     	return queryFactory
     			.selectFrom(q)
-    			.orderBy(orders.toArray(new OrderSpecifier[orders.size()]))
+    			.orderBy(order.stream().toArray(OrderSpecifier[]::new))
     			.fetch();
     }
     

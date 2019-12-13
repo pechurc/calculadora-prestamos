@@ -16,7 +16,7 @@ public final class SortingCriteria extends ABaseCriteria {
 
 	private static final Pattern pattern = Pattern
 			.compile("^(?<field>[a-z]+)\\((?<order>asc|desc)\\)", Pattern.CASE_INSENSITIVE);
-	private List<String> sort_by;
+	private List<String> sort_by = new ArrayList<>();
 
 	public List<OrderSpecifier<?>> getOrderSpecifiers(Object o) {
 
